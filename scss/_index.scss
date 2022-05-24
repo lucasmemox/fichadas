@@ -1,0 +1,100 @@
+.contenedor-grid {
+  display: grid;
+  /*utilizo grid*/
+  grid-template-areas:
+    "cabecera cabecera cabecera"
+    "principal principal principal"
+    "piepagina piepagina piepagina";
+  grid-template-columns: repeat(3, 1fr);
+  /*Son 3 las columnas*/
+  grid-template-rows: repeat(3, 1fr);
+  /*Son 3 las Filas*/
+  grid-template-rows: 80px auto auto;
+
+  margin-top: 0px;
+  /*Margen Superior 0*/
+  margin: 20px auto;
+  /*centro la pagina*/
+  grid-gap: 10px;
+  /*espaciado entre secciones*/
+  /*INDEX*/
+
+  .principal {
+    grid-area: principal;
+    margin: 0 auto;
+
+    .contenedor-index {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      /*Para que se posicionen abajo cuando no entran*/
+      flex-direction: row;
+      /*pongo en fila*/
+
+      justify-content: space-evenly;
+      /*trabaja a nivel de fila la separación*/
+      .titulo-contenido {
+        h1 {
+          margin-bottom: 30px;
+          /*separo el h2 del contenido*/
+          color: rgb(65, 147, 191);
+          font-weight: 700;
+          font-size: 3rem;
+          margin: 0 auto;
+          /* Centro */
+          margin-top: 20px;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+      }
+    }
+
+    .contenedor-principal {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      /*Para que se posicionen abajo cuando no entran*/
+      flex-direction: row;
+      /*pongo en fila*/
+
+      justify-content: space-evenly;
+      /*trabaja a nivel de fila la separacion*/
+
+      background: radial-gradient(circle, #0077ea, #1f4f96, #1b2949, #000);
+
+      .caja {
+        width: 300px;
+        height: 300px;
+        text-align: center;
+        line-height: 60px;
+        margin: 5px;
+        /*Separo las cajas*/
+        margin-left: 70px;
+        margin-right: 70px;
+        margin-top: 20px;
+
+        cursor: pointer;
+
+        .img-clases {
+          width: 300px;
+          height: 300px;
+          border-radius: 12px;
+          border-color: antiquewhite;
+          border-style: solid;
+          border-width: 9px;
+          box-shadow: 5px 6px 7px 0px grey;
+
+          &:hover {
+            -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+            -webkit-transition: all 3s;
+            transition: all 3s;
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+}

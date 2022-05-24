@@ -1,0 +1,97 @@
+.contenedor-registro-usuarios-grid {
+  display: grid;
+  /*utilizo grid*/
+  grid-template-areas:
+    "cabecera           cabecera            cabecera"
+    "registrousuarios   registrousuarios    registrousuarios"
+    "piepagina          piepagina           piepagina";
+  grid-template-columns: repeat(3, 1fr);
+  /*Son 3 las columnas*/
+  grid-template-rows: repeat(3, 1fr);
+  /*Son 3 las Filas*/
+  grid-template-rows: 80px auto auto;
+
+  margin-top: 0px;
+  /*Margen Superior 0*/
+  margin: 20px auto;
+  /*centro la pagina*/
+  grid-gap: 10px;
+  /*espaciado entre secciones*/
+
+  .principal-registro-usuarios {
+    grid-area: registrousuarios;
+    margin: 0 auto;
+    /*0 arriba y abajo - y automático a los costados - me queda centrado*/
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    /*Separación entre lineas de un párrafo*/
+    color: black;
+
+    .form-registrar {
+      width: 450px;
+      margin: auto; //para que se centre
+
+      h1 {
+        color: #3c93b0;
+      }
+
+      hr {
+        border: 0;
+        background: #ccc;
+        height: 1px;
+        margin: 10px 0;
+        display: block; //para que utilice todo el ancho
+      }
+
+      form {
+        background: #fff;
+        margin: auto;
+        padding: 20px 50px; // arriba hacia abajo(20) --- A los lados(50)
+        border: 1px solid #d1d1d1;
+
+        label {
+          display: block;
+          font-size: 12px;
+          margin: 15px auto 5px; // 15 arriba -- auto a derecha -- 5 hacia abajo -- auto izquierda
+        }
+
+        input,
+        select {
+          display: block;
+          width: 100%;
+          font-size: 11pt;
+          padding: 5px;
+          border: 1px solid #85929e;
+          border-radius: 5px;
+        }
+
+        .btn-guardar {
+          font-size: 12px;
+          background: #12a4c6;
+          padding: 10px;
+          color: #fff;
+          letter-spacing: 1px; //se separa el texto
+          cursor: pointer;
+          margin: 15px auto;
+        }
+      }
+      .alerta {
+        width: 100%;
+        background: #66e07d66;
+        border-radius: 5px;
+        margin: 20px auto;
+
+        .msg_error {
+          color: #e65656;
+        }
+        .msg_guardar {
+          color: #126e00;
+        }
+
+        p {
+          padding: 10px;
+        }
+      }
+    }
+  }
+}

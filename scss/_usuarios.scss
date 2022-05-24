@@ -1,0 +1,104 @@
+.contenedor-usuarios-grid {
+  display: grid;
+  /*utilizo grid*/
+  grid-template-areas:
+    "cabecera cabecera cabecera"
+    "usuarios   usuarios    usuarios"
+    "piepagina piepagina piepagina";
+  grid-template-columns: repeat(3, 1fr);
+  /*Son 3 las columnas*/
+  grid-template-rows: repeat(3, 1fr);
+  /*Son 3 las Filas*/
+  grid-template-rows: 80px auto auto;
+
+  margin-top: 0px;
+  /*Margen Superior 0*/
+  margin: 20px auto;
+  /*centro la pagina*/
+  grid-gap: 10px;
+  /*espaciado entre secciones*/
+
+  .principal-usuarios {
+    grid-area: usuarios;
+    margin: 0 auto;
+    /*0 arriba y abajo - y automático a los costados - me queda centrado*/
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    /*Separación entre lineas de un párrafo*/
+    color: black;
+
+    .contenedor-usuario {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      /*Para que se posicionen abajo cuando no entran*/
+      flex-direction: row;
+      /*pongo en fila*/
+      justify-content: space-evenly;
+      /*trabaja a nivel de fila la separación*/
+    }
+
+    .contenedor-tabla-usuario {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      /*Para que se posicionen abajo cuando no entran*/
+      flex-direction: row;
+      /*pongo en fila*/
+
+      justify-content: space-evenly;
+      /*trabaja a nivel de fila la separacion*/
+
+      .contenedor-section-usuario {
+        h1 {
+          font-size: 25px;
+          display: inline-block;
+        }
+        a {
+          margin-top: 10px;
+          margin-bottom: 30px;
+        //   color: rgb(102, 100, 99);
+          text-decoration: none;
+        }
+        .btn-nuevo-usuario {
+          display: inline-block;
+          background-color: #239baa;
+          color: #fff;
+          padding: 5px 25px;
+          border-radius: 4px;
+          margin: 20px;
+        }
+
+        table {
+          border-collapse: collapse;
+          font-size: 12px;
+          width: 100%;
+
+          th {
+            text-align: center;
+            padding: 10px;
+            background: #3d7ba8;
+            color: #fff;
+          }
+          tr:nth-child(odd) {
+            background: #fff;
+          }
+          td {
+            padding: 10px;
+            .agregar-usuario {
+              color:#1d7a36;
+            }
+            .editar-usuario {
+              color: #0ca4ce;
+            }
+            .eliminar-usuario {
+              color: #f26b6b;
+            }
+          }
+        }
+      }
+    }
+  }
+}

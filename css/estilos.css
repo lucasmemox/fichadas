@@ -1,0 +1,517 @@
+@charset "UTF-8";
+html {
+  height: 100%;
+  font-size: 62.5%;
+  /* =10px */ }
+
+/*Defino los parámetros del Cuerpo de la pagina*/
+body {
+  color: black;
+  /*Color de Letra*/
+  /*  font-family: Georgia, "Times New Roman", Times, serif; Fuente del Body*/
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-size: 1.4rem;
+  /* Tamaño de Fuente en el Body*/
+  line-height: 1em;
+  /* distancia entre lineas de Texto*/
+  margin: 0;
+  min-height: 100%;
+  /*background-color: white;*/
+  background: #d3cce3;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #e9e4f0, #d3cce3);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #e9e4f0, #d3cce3);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+
+.cabecera {
+  grid-area: cabecera;
+  /*Que ocupe la definición de area*/
+  position: sticky;
+  top: 0;
+  background-repeat: no-repeat;
+  /*No repetir el fondo */
+  background: #007991;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #78ffd6, #007991);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #78ffd6, #007991);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-size: 1.7rem;
+  z-index: 100; }
+
+/*Defino la clase dentro del div que contiene el navegador*/
+.cabecera-nav {
+  display: flex;
+  justify-content: space-around;
+  /* Distribuir items uniformemente Los items tienen el mismo espacio a su alrededor */
+  align-items: center;
+  /*alineo los objetos de la cabecera, el logo y el menu*/ }
+
+.cabecera-nav nav ul {
+  margin: 0;
+  /*margen de cero */
+  padding: 0;
+  /*relleno 0*/
+  list-style: none;
+  /*No tiene elementos de Lista - saca la viñeta */ }
+
+/*Elementos de lista dentro del ul*/
+.cabecera-nav nav ul li {
+  display: inline-block;
+  /*Se va a mostrar el menu "horizontal"*/ }
+
+/*Enlaces dentro de ul li*/
+.cabecera-nav nav ul li a {
+  display: block;
+  /*Se muestran como bloque*/
+  padding: 0.5rem 1rem;
+  /* Relleno Arriba - Abajo*/
+  text-decoration: none;
+  /*Que los enlaces no estén subrayados*/
+  color: white;
+  /*En el header el color de los enlaces sean blancos*/ }
+
+/*Pasar el mouse sobre el menu de cabecera*/
+.cabecera-nav nav ul li a:hover {
+  background: #e85db2;
+  /*color al pasar el mouse sobre el enlace*/
+  transition: all 0.4s linear;
+  /*pongo una animación de 4 segundos lineal*/
+  border-radius: 5px; }
+
+.logo-imagen {
+  display: block;
+  width: 90px;
+  height: 70px; }
+
+.logo-acordeon {
+  display: block;
+  width: 24px;
+  height: 24px; }
+
+.piepagina {
+  grid-area: piepagina; }
+
+.piepagina-contenedor {
+  display: grid;
+  grid-template-areas: "info-pie      clases-pie     horarios-pie" "derechos-pie  derechos-pie   derechos-pie";
+  grid-template-columns: repeat(3, 1fr);
+  /*Son 3 las columnas*/
+  grid-template-rows: repeat(2, 1fr);
+  /*2 Fila*/
+  grid-template-rows: auto;
+  background: #007991;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #78ffd6, #007991);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #78ffd6, #007991);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-size: 1.7rem;
+  width: 100%;
+  padding: 50px 0px; }
+
+.piepagina-contenedor h2 {
+  margin-bottom: 30px;
+  /*separo el h2 del contenido*/
+  color: #343434;
+  font-weight: 700;
+  margin: 0 auto;
+  /* Centro */
+  margin-top: 20px; }
+
+.piepagina-contenedor a {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  /*separo el h2 del contenido*/
+  color: #666463;
+  font-weight: 600;
+  text-decoration: none;
+  /*Que los enlaces no estén subrayados*/ }
+
+.piepagina-contenedor a:hover {
+  opacity: 0.8; }
+
+.piepagina-contenedor a .fa-brands .fa-solid {
+  font-size: 20px;
+  /*para los iconos del fab*/ }
+
+.info-pie {
+  grid-area: info-pie;
+  display: grid; }
+
+.logo-pie {
+  /* Máximo ancho posible para el para la imagen */
+  margin: 0 auto;
+  /* Centro la imagen */
+  margin-top: 5px;
+  /*Separo la imagen del Main*/
+  display: block;
+  width: 100px;
+  height: 60px; }
+
+.datos-infopie {
+  display: flex;
+  flex-direction: column;
+  /*Los elementos se alinean en columnas*/
+  flex-wrap: wrap;
+  margin: 0 auto;
+  /* Centro */
+  padding: 40px;
+  /*espaciado*/
+  margin-top: 5px;
+  /*para separarlo del logo*/ }
+
+.clases-pie {
+  grid-area: clases-pie;
+  display: grid; }
+
+.datos-clases-pie {
+  display: flex;
+  flex-direction: column;
+  /*Los elementos se alinean en columnas*/
+  flex-wrap: wrap;
+  margin: 0 auto;
+  /* Centro */
+  padding: 40px;
+  /*espaciado*/ }
+
+.horarios-pie {
+  grid-area: horarios-pie;
+  display: grid; }
+
+.datos-horarios-pie {
+  display: flex;
+  flex-direction: column;
+  /*Los elementos se alinean en columnas*/
+  flex-wrap: wrap;
+  margin: 0 auto;
+  /* Centro */
+  padding: 40px;
+  /*espaciado*/ }
+
+.derechos-pie {
+  grid-area: derechos-pie;
+  display: grid; }
+
+.datos-derechos-pie {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+  padding: 0px 30px; }
+
+.datos-derechos-pie p {
+  margin-top: 20px;
+  color: #343434; }
+
+.datos-derechos-pie hr {
+  height: 2px;
+  background-color: white; }
+
+.contenedor-grid {
+  display: grid;
+  /*utilizo grid*/
+  grid-template-areas: "cabecera cabecera cabecera" "principal principal principal" "piepagina piepagina piepagina";
+  grid-template-columns: repeat(3, 1fr);
+  /*Son 3 las columnas*/
+  grid-template-rows: repeat(3, 1fr);
+  /*Son 3 las Filas*/
+  grid-template-rows: 80px auto auto;
+  margin-top: 0px;
+  /*Margen Superior 0*/
+  margin: 20px auto;
+  /*centro la pagina*/
+  grid-gap: 10px;
+  /*espaciado entre secciones*/
+  /*INDEX*/ }
+  .contenedor-grid .principal {
+    grid-area: principal;
+    margin: 0 auto; }
+    .contenedor-grid .principal .contenedor-index {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      /*Para que se posicionen abajo cuando no entran*/
+      flex-direction: row;
+      /*pongo en fila*/
+      justify-content: space-evenly;
+      /*trabaja a nivel de fila la separación*/ }
+      .contenedor-grid .principal .contenedor-index .titulo-contenido h1 {
+        margin-bottom: 30px;
+        /*separo el h2 del contenido*/
+        color: #4193bf;
+        font-weight: 700;
+        font-size: 3rem;
+        margin: 0 auto;
+        /* Centro */
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center; }
+    .contenedor-grid .principal .contenedor-principal {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      /*Para que se posicionen abajo cuando no entran*/
+      flex-direction: row;
+      /*pongo en fila*/
+      justify-content: space-evenly;
+      /*trabaja a nivel de fila la separacion*/
+      background: radial-gradient(circle, #0077ea, #1f4f96, #1b2949, #000); }
+      .contenedor-grid .principal .contenedor-principal .caja {
+        width: 300px;
+        height: 300px;
+        text-align: center;
+        line-height: 60px;
+        margin: 5px;
+        /*Separo las cajas*/
+        margin-left: 70px;
+        margin-right: 70px;
+        margin-top: 20px;
+        cursor: pointer; }
+        .contenedor-grid .principal .contenedor-principal .caja .img-clases {
+          width: 300px;
+          height: 300px;
+          border-radius: 12px;
+          border-color: antiquewhite;
+          border-style: solid;
+          border-width: 9px;
+          box-shadow: 5px 6px 7px 0px grey; }
+          .contenedor-grid .principal .contenedor-principal .caja .img-clases:hover {
+            -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+            -webkit-transition: all 3s;
+            transition: all 3s;
+            opacity: 0.8; }
+
+.contenedor-usuarios-grid {
+  display: grid;
+  /*utilizo grid*/
+  grid-template-areas: "cabecera cabecera cabecera" "usuarios   usuarios    usuarios" "piepagina piepagina piepagina";
+  grid-template-columns: repeat(3, 1fr);
+  /*Son 3 las columnas*/
+  grid-template-rows: repeat(3, 1fr);
+  /*Son 3 las Filas*/
+  grid-template-rows: 80px auto auto;
+  margin-top: 0px;
+  /*Margen Superior 0*/
+  margin: 20px auto;
+  /*centro la pagina*/
+  grid-gap: 10px;
+  /*espaciado entre secciones*/ }
+  .contenedor-usuarios-grid .principal-usuarios {
+    grid-area: usuarios;
+    margin: 0 auto;
+    /*0 arriba y abajo - y automático a los costados - me queda centrado*/
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    /*Separación entre lineas de un párrafo*/
+    color: black; }
+    .contenedor-usuarios-grid .principal-usuarios .contenedor-usuario {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      /*Para que se posicionen abajo cuando no entran*/
+      flex-direction: row;
+      /*pongo en fila*/
+      justify-content: space-evenly;
+      /*trabaja a nivel de fila la separación*/ }
+    .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      /*Para que se posicionen abajo cuando no entran*/
+      flex-direction: row;
+      /*pongo en fila*/
+      justify-content: space-evenly;
+      /*trabaja a nivel de fila la separacion*/ }
+      .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario h1 {
+        font-size: 25px;
+        display: inline-block; }
+      .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario a {
+        margin-top: 10px;
+        margin-bottom: 30px;
+        text-decoration: none; }
+      .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario .btn-nuevo-usuario {
+        display: inline-block;
+        background-color: #239baa;
+        color: #fff;
+        padding: 5px 25px;
+        border-radius: 4px;
+        margin: 20px; }
+      .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario table {
+        border-collapse: collapse;
+        font-size: 12px;
+        width: 100%; }
+        .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario table th {
+          text-align: center;
+          padding: 10px;
+          background: #3d7ba8;
+          color: #fff; }
+        .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario table tr:nth-child(odd) {
+          background: #fff; }
+        .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario table td {
+          padding: 10px; }
+          .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario table td .agregar-usuario {
+            color: #1d7a36; }
+          .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario table td .editar-usuario {
+            color: #0ca4ce; }
+          .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario table td .eliminar-usuario {
+            color: #f26b6b; }
+
+.contenedor-registro-usuarios-grid {
+  display: grid;
+  /*utilizo grid*/
+  grid-template-areas: "cabecera           cabecera            cabecera" "registrousuarios   registrousuarios    registrousuarios" "piepagina          piepagina           piepagina";
+  grid-template-columns: repeat(3, 1fr);
+  /*Son 3 las columnas*/
+  grid-template-rows: repeat(3, 1fr);
+  /*Son 3 las Filas*/
+  grid-template-rows: 80px auto auto;
+  margin-top: 0px;
+  /*Margen Superior 0*/
+  margin: 20px auto;
+  /*centro la pagina*/
+  grid-gap: 10px;
+  /*espaciado entre secciones*/ }
+  .contenedor-registro-usuarios-grid .principal-registro-usuarios {
+    grid-area: registrousuarios;
+    margin: 0 auto;
+    /*0 arriba y abajo - y automático a los costados - me queda centrado*/
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    /*Separación entre lineas de un párrafo*/
+    color: black; }
+    .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar {
+      width: 450px;
+      margin: auto; }
+      .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar h1 {
+        color: #3c93b0; }
+      .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar hr {
+        border: 0;
+        background: #ccc;
+        height: 1px;
+        margin: 10px 0;
+        display: block; }
+      .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar form {
+        background: #fff;
+        margin: auto;
+        padding: 20px 50px;
+        border: 1px solid #d1d1d1; }
+        .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar form label {
+          display: block;
+          font-size: 12px;
+          margin: 15px auto 5px; }
+        .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar form input,
+        .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar form select {
+          display: block;
+          width: 100%;
+          font-size: 11pt;
+          padding: 5px;
+          border: 1px solid #85929e;
+          border-radius: 5px; }
+        .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar form .btn-guardar {
+          font-size: 12px;
+          background: #12a4c6;
+          padding: 10px;
+          color: #fff;
+          letter-spacing: 1px;
+          cursor: pointer;
+          margin: 15px auto; }
+      .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar .alerta {
+        width: 100%;
+        background: #66e07d66;
+        border-radius: 5px;
+        margin: 20px auto; }
+        .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar .alerta .msg_error {
+          color: #e65656; }
+        .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar .alerta .msg_guardar {
+          color: #126e00; }
+        .contenedor-registro-usuarios-grid .principal-registro-usuarios .form-registrar .alerta p {
+          padding: 10px; }
+
+.contenedor-editar-usuarios-grid {
+  display: grid;
+  /*utilizo grid*/
+  grid-template-areas: "cabecera           cabecera            cabecera" "editar             editar              editar" "piepagina          piepagina           piepagina";
+  grid-template-columns: repeat(3, 1fr);
+  /*Son 3 las columnas*/
+  grid-template-rows: repeat(3, 1fr);
+  /*Son 3 las Filas*/
+  grid-template-rows: 80px auto auto;
+  margin-top: 0px;
+  /*Margen Superior 0*/
+  margin: 20px auto;
+  /*centro la pagina*/
+  grid-gap: 10px;
+  /*espaciado entre secciones*/ }
+  .contenedor-editar-usuarios-grid .principal-editar-usuarios {
+    grid-area: editar;
+    margin: 0 auto;
+    /*0 arriba y abajo - y automático a los costados - me queda centrado*/
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    /*Separación entre lineas de un párrafo*/
+    color: black; }
+    .contenedor-editar-usuarios-grid .principal-editar-usuarios .contenedor-usuario-editar {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      /*Para que se posicionen abajo cuando no entran*/
+      flex-direction: row;
+      /*pongo en fila*/
+      justify-content: space-evenly;
+      /*trabaja a nivel de fila la separación*/ }
+    .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar {
+      width: 450px;
+      margin: auto; }
+      .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar h1 {
+        color: #3c93b0; }
+      .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar hr {
+        border: 0;
+        background: #ccc;
+        height: 1px;
+        margin: 10px 0;
+        display: block; }
+      .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar form {
+        background: #fff;
+        margin: auto;
+        padding: 20px 50px;
+        border: 1px solid #d1d1d1; }
+        .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar form label {
+          display: block;
+          font-size: 12px;
+          margin: 15px auto 5px; }
+        .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar form input,
+        .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar form select {
+          display: block;
+          width: 100%;
+          font-size: 11pt;
+          padding: 5px;
+          border: 1px solid #85929e;
+          border-radius: 5px; }
+        .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar form .btn-editar {
+          font-size: 12px;
+          background: #12a4c6;
+          padding: 10px;
+          color: #fff;
+          letter-spacing: 1px;
+          cursor: pointer;
+          margin: 15px auto; }
+      .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar .alerta_editar {
+        width: 100%;
+        background: #66e07d66;
+        border-radius: 5px;
+        margin: 20px auto; }
+        .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar .alerta_editar .msg_error_editar {
+          color: #e65656; }
+        .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar .alerta_editar .msg_guardar_editar {
+          color: #126e00; }
+        .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar .alerta_editar p {
+          padding: 10px; }

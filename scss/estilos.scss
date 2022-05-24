@@ -1,0 +1,250 @@
+@import "variables";
+
+html {
+  height: 100%;
+  font-size: 62.5%;
+  /* =10px */
+}
+
+/*Defino los parámetros del Cuerpo de la pagina*/
+body {
+  color: black;
+  /*Color de Letra*/
+  /*  font-family: Georgia, "Times New Roman", Times, serif; Fuente del Body*/
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-size: 1.4rem;
+  /* Tamaño de Fuente en el Body*/
+  line-height: 1em;
+  /* distancia entre lineas de Texto*/
+  margin: 0;
+  min-height: 100%;
+  /*background-color: white;*/
+
+  background: #d3cce3;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #e9e4f0, #d3cce3);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #e9e4f0, #d3cce3);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.cabecera {
+  grid-area: cabecera;
+  /*Que ocupe la definición de area*/
+  position: sticky;
+  top: 0;
+  background-repeat: no-repeat;
+  /*No repetir el fondo */
+
+  @include gradiente;
+
+  font-size: 1.7rem;
+  z-index: 100;
+}
+
+/*Defino la clase dentro del div que contiene el navegador*/
+.cabecera-nav {
+  display: flex;
+
+  justify-content: space-around;
+  /* Distribuir items uniformemente Los items tienen el mismo espacio a su alrededor */
+  align-items: center;
+  /*alineo los objetos de la cabecera, el logo y el menu*/
+}
+
+.cabecera-nav nav ul {
+  margin: 0;
+  /*margen de cero */
+  padding: 0;
+  /*relleno 0*/
+  list-style: none;
+  /*No tiene elementos de Lista - saca la viñeta */
+}
+
+/*Elementos de lista dentro del ul*/
+.cabecera-nav nav ul li {
+  display: inline-block;
+  /*Se va a mostrar el menu "horizontal"*/
+}
+
+/*Enlaces dentro de ul li*/
+.cabecera-nav nav ul li a {
+  display: block;
+  /*Se muestran como bloque*/
+  padding: 0.5rem 1rem;
+  /* Relleno Arriba - Abajo*/
+  text-decoration: none;
+  /*Que los enlaces no estén subrayados*/
+  color: white;
+  /*En el header el color de los enlaces sean blancos*/
+}
+
+/*Pasar el mouse sobre el menu de cabecera*/
+.cabecera-nav nav ul li a:hover {
+  // @include resaltado;
+  background: rgb(232, 93, 178);
+  /*color al pasar el mouse sobre el enlace*/
+  transition: all 0.4s linear;
+  /*pongo una animación de 4 segundos lineal*/
+  border-radius: 5px;
+}
+
+.logo-imagen {
+  display: block;
+  width: 90px;
+  height: 70px;
+}
+
+.logo-acordeon {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+//PIE PAGINA
+.piepagina {
+  grid-area: piepagina;
+}
+
+.piepagina-contenedor {
+  display: grid;
+  grid-template-areas:
+    "info-pie      clases-pie     horarios-pie"
+    "derechos-pie  derechos-pie   derechos-pie";
+  grid-template-columns: repeat(3, 1fr);
+  /*Son 3 las columnas*/
+  grid-template-rows: repeat(2, 1fr);
+  /*2 Fila*/
+  grid-template-rows: auto;
+
+  @include gradiente;
+
+  font-size: 1.7rem;
+
+  width: 100%;
+  padding: 50px 0px;
+}
+
+.piepagina-contenedor h2 {
+  margin-bottom: 30px;
+  /*separo el h2 del contenido*/
+  color: #343434;
+  font-weight: 700;
+  margin: 0 auto;
+  /* Centro */
+  margin-top: 20px;
+}
+
+.piepagina-contenedor a {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  /*separo el h2 del contenido*/
+  color: rgb(102, 100, 99);
+  font-weight: 600;
+  text-decoration: none;
+  /*Que los enlaces no estén subrayados*/
+}
+
+.piepagina-contenedor a:hover {
+  opacity: 0.8;
+}
+
+.piepagina-contenedor a .fa-brands .fa-solid {
+  font-size: 20px;
+  /*para los iconos del fab*/
+}
+
+.info-pie {
+  grid-area: info-pie;
+  display: grid;
+}
+
+.logo-pie {
+  /* Máximo ancho posible para el para la imagen */
+  margin: 0 auto;
+  /* Centro la imagen */
+  margin-top: 5px;
+  /*Separo la imagen del Main*/
+  display: block;
+  width: 100px;
+  height: 60px;
+}
+
+.datos-infopie {
+  display: flex;
+  flex-direction: column;
+  /*Los elementos se alinean en columnas*/
+  flex-wrap: wrap;
+  margin: 0 auto;
+  /* Centro */
+  padding: 40px;
+  /*espaciado*/
+  margin-top: 5px;
+  /*para separarlo del logo*/
+}
+
+.clases-pie {
+  grid-area: clases-pie;
+  display: grid;
+}
+
+.datos-clases-pie {
+  display: flex;
+  flex-direction: column;
+  /*Los elementos se alinean en columnas*/
+  flex-wrap: wrap;
+  margin: 0 auto;
+  /* Centro */
+  padding: 40px;
+  /*espaciado*/
+}
+
+.horarios-pie {
+  grid-area: horarios-pie;
+  display: grid;
+}
+
+.datos-horarios-pie {
+  display: flex;
+  flex-direction: column;
+  /*Los elementos se alinean en columnas*/
+  flex-wrap: wrap;
+  margin: 0 auto;
+  /* Centro */
+  padding: 40px;
+  /*espaciado*/
+}
+
+.derechos-pie {
+  grid-area: derechos-pie;
+  display: grid;
+}
+
+.datos-derechos-pie {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+  padding: 0px 30px;
+}
+
+.datos-derechos-pie p {
+  margin-top: 20px;
+  color: #343434;
+}
+
+.datos-derechos-pie hr {
+  height: 2px;
+  background-color: white;
+}
+
+//FIN PIE
+
+@import "index";
+@import "usuarios";
+@import "registro_usuarios";
+@import "editar_usuarios";
+
+
+
