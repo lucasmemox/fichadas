@@ -16,6 +16,7 @@ if($resuconsulta == 0){
     header("Location: usuarios.php");
     }else{
         while($datos = pg_fetch_array($consulta)){ 
+
             $iduser =  $datos['id'];
             $usuario =  $datos['usuario'];
             $clave =  $datos['clave'];
@@ -23,6 +24,7 @@ if($resuconsulta == 0){
             $nombre =  $datos['nombre'];
             $idrol =  $datos['idrol'];
             $rol =  $datos['rol'];
+            
     }
 }
 ?>
