@@ -1,5 +1,6 @@
 <!doctype html>
 <?php
+
 include '../src/fichadas.php';
 
 if(!empty($_GET['id'])){
@@ -24,7 +25,6 @@ if($resuconsulta == 0){
             $nombre =  $datos['nombre'];
             $idrol =  $datos['idrol'];
             $rol =  $datos['rol'];
-            
     }
 }
 ?>
