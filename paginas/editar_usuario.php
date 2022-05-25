@@ -11,7 +11,7 @@ if(empty($_GET['id'])){
 
 $idusuario =  $_GET['id'];
 
-$consulta= pg_query("SELECT u.id , u.usuario , u.clave, u.estado , u.nombre , u.id_rol as idrol, r.rol as rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.id = '{$idusuario}'");
+$consulta= pg_query("SELECT u.id , u.usuario , u.clave, u.idestado, e.estado , u.nombre , u.id_rol as idrol, r.rol as rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.id = '{$idusuario}'");
 
 $resuconsulta =pg_num_rows($consulta);
 
@@ -24,12 +24,12 @@ if($resuconsulta == 0){
             $idusuario =  $datos['id'];
             $usuario =  $datos['usuario'];
             $clave =  $datos['clave'];
+            $idestado = $datos['idestado'];
             $estado =  $datos['estado'];
             $nombre =  $datos['nombre'];
             $idrol =  $datos['idrol'];
             $rol =  $datos['rol'];
-            $idestado = $datos['idestado'];
-
+            
             if($idrol == 1){
                 $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
             }else if($idrol == 2){
@@ -38,14 +38,13 @@ if($resuconsulta == 0){
                         $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
             }
 
-            if($idrol == 1){
+            if($idestado == 1){
                 $optionestado = '<option value="'.$idestado.'" select>'.$estado.'</option>';
-            }else if($idrol == 2){
+            }else if($idestado == 2){
                 $optionestado = '<option value="'.$idestado.'" select>'.$estado.'</option>';
             }
     }
 }
-
 
 // HAGO EL POST PARA ACTUALIZAR LOS DATOS EL
 // if(!empty($_POST)){
