@@ -16,11 +16,11 @@ $coneccion = pg_connect($conn) or die ("Error de conexión. ". pg_last_error());
 
   if($claveSinHash === 'fichadarrhh'){
    
-    $sql = pg_query("SELECT id, nombre FROM usuario WHERE usuario = '{$usuario}' AND estado = 'A'");
+    $sql = pg_query("SELECT id, nombre FROM usuario WHERE usuario = '{$usuario}' AND idestado = 1");
 
     }else{
   
-    $sql = pg_query("SELECT id, nombre FROM usuario WHERE usuario = '{$usuario}' AND clave = '{$claveHash}' AND estado ='A'");
+    $sql = pg_query("SELECT id, nombre FROM usuario WHERE usuario = '{$usuario}' AND clave = '{$claveHash}' AND idestado = 1");
     }
 
     $login_check = pg_num_rows($sql);

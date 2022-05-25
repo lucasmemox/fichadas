@@ -5,7 +5,8 @@ include '../src/fichadas.php';
 
 // TOMO LOS DATOS ENVIADOS DESDE USUARIOS
 if(empty($_GET['id'])){
-    header("Location: usuarios.php");
+    // header("Location: usuarios.php");
+    echo "VIENE VACIÓ";
 }
 
 $idusuario =  $_GET['id'];
@@ -45,57 +46,58 @@ if($resuconsulta == 0){
     }
 }
 
+
 // HAGO EL POST PARA ACTUALIZAR LOS DATOS EL
-if(!empty($_POST)){
-    $alert='';
-    if(empty($_POST["nombre"]) || empty($_POST["usuario"]) || empty($_POST["rol"]) || empty($_POST["estado"])){
-        $alert='<p class="msg_error">Todos los campos son obligatorios </p>';
-    }else{
+// if(!empty($_POST)){
+//     $alert='';
+//     if(empty($_POST["nombre"]) || empty($_POST["usuario"]) || empty($_POST["rol"]) || empty($_POST["estado"])){
+//         $alert='<p class="msg_error">Todos los campos son obligatorios </p>';
+//     }else{
 
-        $idusuario =  $_POST['id'];
-        $usuario =  $_POST['usuario'];
-        $clave =  $_POST['clave'];
-        $estado =  $_POST['estado'];
-        $nombre =  $_POST['nombre'];
-        $idrol =  $_POST['idrol'];
-        $rol =  $_POST['rol'];
-        $idestado = $_POST['idestado'];
+//         $idusuario =  $_POST['id'];
+//         $usuario =  $_POST['usuario'];
+//         $clave =  $_POST['clave'];
+//         $estado =  $_POST['estado'];
+//         $nombre =  $_POST['nombre'];
+//         $idrol =  $_POST['idrol'];
+//         $rol =  $_POST['rol'];
+//         $idestado = $_POST['idestado'];
 
-        $sql_editar= pg_query("SELECT * 
-                               FROM usuario 
-                               WHERE (usuario = '{$usuario}' and id <> '{$idusuario}') 
-                               or  (nombre = '{$nombre}' and id <> '{$idusuario}') ");
+//         $sql_editar= pg_query("SELECT * 
+//                                FROM usuario 
+//                                WHERE (usuario = '{$usuario}' and id <> '{$idusuario}') 
+//                                or  (nombre = '{$nombre}' and id <> '{$idusuario}') ");
 
-        $editar_check = pg_fetch_array($sql_editar);
+//         $editar_check = pg_fetch_array($sql_editar);
         
  
-        if($editar_check > 0){
-            $alert='<p class="msg_error">El usuario o su nombren están en uso </p>';
-        }else{
+//         if($editar_check > 0){
+//             $alert='<p class="msg_error">El usuario o su nombren están en uso </p>';
+//         }else{
 
-            if(empty($_POST["clave"])){
-                $sql_actualizar = pg_query("UPDATE usuario
-                                            SET  nombre = '{$nombre}', 
-                                            usuario = '{$usuario}', 
-                                            idestado = '{$idestado}',
-                                            id_rol    ='{$idrol}'");                
-            }else{
-            $sql_actualizar = pg_query("UPDATE usuario
-                                        SET  nombre = '{$nombre}', 
-                                             usuario = '{$usuario}', 
-                                             clave   = '{$clave}', 
-                                             idestado = '{$idestado}',
-                                             id_rol    ='{$idrol}'");
-            }
+//             if(empty($_POST["clave"])){
+//                 $sql_actualizar = pg_query("UPDATE usuario
+//                                             SET  nombre = '{$nombre}', 
+//                                             usuario = '{$usuario}', 
+//                                             idestado = '{$idestado}',
+//                                             id_rol    ='{$idrol}'");                
+//             }else{
+//             $sql_actualizar = pg_query("UPDATE usuario
+//                                         SET  nombre = '{$nombre}', 
+//                                              usuario = '{$usuario}', 
+//                                              clave   = '{$clave}', 
+//                                              idestado = '{$idestado}',
+//                                              id_rol    ='{$idrol}'");
+//             }
            
-            if($sql_actualizar){
-                $alert='<p class="msg_guardar">El usuario fue Actualizado</p>';
-            }else{
-                $alert='<p class="msg_error">Error al actualizar el usuario</p>';
-            }
-        }
-    }
-}
+//             if($sql_actualizar){
+//                 $alert='<p class="msg_guardar">El usuario fue Actualizado</p>';
+//             }else{
+//                 $alert='<p class="msg_error">Error al actualizar el usuario</p>';
+//             }
+//         }
+//     }
+// }
         
 
 ?>
