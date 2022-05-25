@@ -3,13 +3,14 @@
 
 include '../src/fichadas.php';
 
-if(!empty($_GET['id'])){
+if(empty($_GET['id'])){
     header("Location: usuarios.php");
 }
 
 $idusuario =  $_GET['id'];
+echo 'ID: ' + $idusuario;
 
-$consulta= pg_query("SELECT u.id , u.usuario , u.clave, u.estado , u.nombre , u.id_rol as idrol, r.rol as rol  FROM  usuario u, rol r WHERE u.id_rol = r.id and u.id = '{$idusuario}'");
+$consulta= pg_query("SELECT u.id , u.usuario , u.clave, u.estado , u.nombre , u.id_rol as idrol, r.rol as rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.id = '{$idusuario}'");
 
 $resuconsulta =pg_num_rows($consulta);
 
@@ -26,6 +27,7 @@ if($resuconsulta == 0){
             $nombre =  $datos['nombre'];
             $idrol =  $datos['idrol'];
             $rol =  $datos['rol'];
+            $idestado = $datos['idestado'];
 
             if($idrol == 1){
                 $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
@@ -33,6 +35,12 @@ if($resuconsulta == 0){
                 $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
             }else if($idrol == 3){
                         $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
+            }
+
+            if($idrol == 1){
+                $optionestado = '<option value="'.$idestado.'" select>'.$estado.'</option>';
+            }else if($idrol == 2){
+                $optionestado = '<option value="'.$idestado.'" select>'.$estado.'</option>';
             }
     }
 }
@@ -133,11 +141,31 @@ if($resuconsulta == 0){
                         
                         <form action="" method="post">
                         <label for="usuario">Usuario</label>
-                        <input type="text" name="usuario" id="usuario" placeholder="Usuario">
+                        <input type="text" name="usuario" id="usuario" placeholder="Usuario" value="<?php echo $usuario?>">
                         <label for="clave">Clave</label>
-                        <input type="password" name="clave" id="clave" placeholder="Clave">
-                        <label for="estado">Nombre</label>
-                        <input type="text" name="nombre" id="nombre" placeholder="Nombre">
+                        <input type="password" name="clave" id="clave" placeholder="Clave" value="<?php echo $clave?>">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre" value="<?php echo $nombre?>">
+                        <!-- SELECT ESTADO -->
+                        <label for="estado">Estado</label>
+                        <?php
+                        $sql_estado = pg_query("SELECT *  FROM  estado");
+                        $estado_check = pg_num_rows($sql_estado);
+                        ?>
+                        <select name="estado" id="estado" placeholder="estado" class="noseleccionado" >
+                        <?php
+                        echo $optionestado;
+                         if($estado_check > 0){
+
+                            while($filaestado = pg_fetch_array($sql_estado)){
+                        ?>
+                        <option value="<?php echo $filaestado["id"]; ?>"><?php echo $filaestado["estado"]; ?> </option>
+                        <?php
+                            }
+                        }  
+                        ?>
+                        </select>
+                        <!-- FIN SELECT ESTADO -->
                         <label for="rol">Rol</label>
                         <?php
                         $sql_rol = pg_query("SELECT *  FROM  rol");
@@ -145,7 +173,7 @@ if($resuconsulta == 0){
                         $rol_check = pg_num_rows($sql_rol);
 
                         ?>
-                        <select name="rol" id="rol" placeholder="Rol">
+                        <select name="rol" id="rol" placeholder="Rol" class="noseleccionado">
                         <?php
                         echo $option;
                          if($rol_check > 0){

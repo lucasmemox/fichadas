@@ -76,7 +76,11 @@
             border: 1px solid #85929e;
             border-radius: 5px;
           }
-  
+          
+          .noseleccionado option:first-child {
+              display: none; 
+          }
+
           .btn-editar {
             font-size: 12px;
             background: #12a4c6;

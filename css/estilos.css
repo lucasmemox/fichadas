@@ -496,6 +496,8 @@ body {
           padding: 5px;
           border: 1px solid #85929e;
           border-radius: 5px; }
+        .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar form .noseleccionado option:first-child {
+          display: none; }
         .contenedor-editar-usuarios-grid .principal-editar-usuarios .form-editar form .btn-editar {
           font-size: 12px;
           background: #12a4c6;
