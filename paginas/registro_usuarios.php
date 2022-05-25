@@ -20,9 +20,9 @@ if(!empty($_POST)){
             $alert='<p class="msg_error">El usuario esta en uso </p>';
         }else{
             $clave_md5= md5($clave);
-            $activo = 'A';
+            $activo = 1;
         
-            $insert_usuario = pg_query("INSERT INTO usuario(id, usuario, clave, estado, nombre, id_rol)  VALUES((select nextVal('sq_rol')),'{$usuario}','{$clave_md5}','{$activo}','{$nombre}','{$rol}')");
+            $insert_usuario = pg_query("INSERT INTO usuario(id, usuario, clave, idestado, nombre, id_rol)  VALUES((select nextVal('sq_rol')),'{$usuario}','{$clave_md5}','{$activo}','{$nombre}','{$rol}')");
             
             if($insert_usuario){
                 $alert='<p class="msg_guardar">El usuario fue Creado con Éxito</p>';
@@ -135,7 +135,7 @@ if(!empty($_POST)){
                         <input type="text" name="nombre" id="nombre" placeholder="Nombre">
                         <label for="rol">Rol</label>
                         <?php
-                        $sql_rol = pg_query("SELECT *  FROM  rol");
+                        $sql_rol = pg_query("SELECT * FROM  rol");
 
                         $rol_check = pg_num_rows($sql_rol);
 

@@ -3,12 +3,12 @@
 
 include '../src/fichadas.php';
 
+// TOMO LOS DATOS ENVIADOS DESDE USUARIOS
 if(empty($_GET['id'])){
     header("Location: usuarios.php");
 }
 
 $idusuario =  $_GET['id'];
-echo 'ID: ' + $idusuario;
 
 $consulta= pg_query("SELECT u.id , u.usuario , u.clave, u.estado , u.nombre , u.id_rol as idrol, r.rol as rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.id = '{$idusuario}'");
 
@@ -20,7 +20,7 @@ if($resuconsulta == 0){
         $option = '';
         while($datos = pg_fetch_array($consulta)){ 
 
-            $iduser =  $datos['id'];
+            $idusuario =  $datos['id'];
             $usuario =  $datos['usuario'];
             $clave =  $datos['clave'];
             $estado =  $datos['estado'];
@@ -44,6 +44,60 @@ if($resuconsulta == 0){
             }
     }
 }
+
+// HAGO EL POST PARA ACTUALIZAR LOS DATOS EL
+if(!empty($_POST)){
+    $alert='';
+    if(empty($_POST["nombre"]) || empty($_POST["usuario"]) || empty($_POST["rol"]) || empty($_POST["estado"])){
+        $alert='<p class="msg_error">Todos los campos son obligatorios </p>';
+    }else{
+
+        $idusuario =  $_POST['id'];
+        $usuario =  $_POST['usuario'];
+        $clave =  $_POST['clave'];
+        $estado =  $_POST['estado'];
+        $nombre =  $_POST['nombre'];
+        $idrol =  $_POST['idrol'];
+        $rol =  $_POST['rol'];
+        $idestado = $_POST['idestado'];
+
+        $sql_editar= pg_query("SELECT * 
+                               FROM usuario 
+                               WHERE (usuario = '{$usuario}' and id <> '{$idusuario}') 
+                               or  (nombre = '{$nombre}' and id <> '{$idusuario}') ");
+
+        $editar_check = pg_fetch_array($sql_editar);
+        
+ 
+        if($editar_check > 0){
+            $alert='<p class="msg_error">El usuario o su nombren están en uso </p>';
+        }else{
+
+            if(empty($_POST["clave"])){
+                $sql_actualizar = pg_query("UPDATE usuario
+                                            SET  nombre = '{$nombre}', 
+                                            usuario = '{$usuario}', 
+                                            idestado = '{$idestado}',
+                                            id_rol    ='{$idrol}'");                
+            }else{
+            $sql_actualizar = pg_query("UPDATE usuario
+                                        SET  nombre = '{$nombre}', 
+                                             usuario = '{$usuario}', 
+                                             clave   = '{$clave}', 
+                                             idestado = '{$idestado}',
+                                             id_rol    ='{$idrol}'");
+            }
+           
+            if($sql_actualizar){
+                $alert='<p class="msg_guardar">El usuario fue Actualizado</p>';
+            }else{
+                $alert='<p class="msg_error">Error al actualizar el usuario</p>';
+            }
+        }
+    }
+}
+        
+
 ?>
 <html lang="es">
   <head>
@@ -140,10 +194,11 @@ if($resuconsulta == 0){
                         <div class="alerta_editar"><?php echo isset($alert) ? $alert : '' ?></div>
                         
                         <form action="" method="post">
+                        <input type="hidden" name="idusuario" id="idusuario" value="<?php echo $idusuario; ?>">
                         <label for="usuario">Usuario</label>
                         <input type="text" name="usuario" id="usuario" placeholder="Usuario" value="<?php echo $usuario?>">
                         <label for="clave">Clave</label>
-                        <input type="password" name="clave" id="clave" placeholder="Clave" value="<?php echo $clave?>">
+                        <input type="password" name="clave" id="clave" placeholder="Clave" value="">
                         <label for="nombre">Nombre</label>
                         <input type="text" name="nombre" id="nombre" placeholder="Nombre" value="<?php echo $nombre?>">
                         <!-- SELECT ESTADO -->
@@ -186,7 +241,7 @@ if($resuconsulta == 0){
                         }  
                         ?>
                         </select>    
-                        <input type="submit" value="Editar Usuario" class="btn-editar">
+                        <input type="submit" value="Actualizar Usuario" class="btn-editar">
 
                         </form>    
                     </div>
