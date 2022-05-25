@@ -16,6 +16,7 @@ $resuconsulta =pg_num_rows($consulta);
 if($resuconsulta == 0){
     header("Location: usuarios.php");
     }else{
+        $option = '';
         while($datos = pg_fetch_array($consulta)){ 
 
             $iduser =  $datos['id'];
@@ -25,6 +26,14 @@ if($resuconsulta == 0){
             $nombre =  $datos['nombre'];
             $idrol =  $datos['idrol'];
             $rol =  $datos['rol'];
+
+            if($idrol == 1){
+                $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
+            }else if($idrol == 2){
+                $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
+            }else if($idrol == 3){
+                        $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
+            }
     }
 }
 ?>
@@ -138,6 +147,7 @@ if($resuconsulta == 0){
                         ?>
                         <select name="rol" id="rol" placeholder="Rol">
                         <?php
+                        echo $option;
                          if($rol_check > 0){
 
                             while($fila = pg_fetch_array($sql_rol)){
