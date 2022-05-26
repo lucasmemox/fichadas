@@ -1,7 +1,7 @@
 <!doctype html>
 <?php
-
-include '../src/fichadas.php';
+ 
+require_once('../src/fichadas.php'); 
 
 // TOMO LOS DATOS ENVIADOS DESDE USUARIOS
 if(empty($_GET['id'])){
@@ -52,27 +52,28 @@ if(!empty($_POST)){
         $alert='<p class="msg_error">Todos los campos son obligatorios </p>';
     }else{
 
-        $idusuario =  $_POST['id'];
+        $iduser =  $_POST['idusuario'];
         $usuario =  $_POST['usuario'];
         $clave =  $_POST['clave'];
         $estado =  $_POST['estado'];
         $nombre =  $_POST['nombre'];
         $rol =  $_POST['rol'];
 
-        echo "usuario: ". $idusuario." ". $usuario." ". $clave." ". $estado." ". $nombre." ".$rol;  
+        echo "idusuario: ". $iduser; 
+        echo "usuario: ". $usuario;
+        echo "clave: ". $clave;
+        echo "estado: ". $estado;
+        echo "nombre:  ". $nombre;
+        echo "rol: ".$rol;  
 
-        $sqleditar= pg_query("SELECT count(*) 
-                               FROM usuario 
-                               WHERE (usuario = '{$usuario}' and id <> '{$idusuario}') 
-                               or  (nombre = '{$nombre}' and id <> '{$idusuario}') ");
+        $control = pg_query("SELECT count(*) FROM usuario u 
+                             WHERE u.usuario = '{$usuario}' AND u.id <> '{$iduser}'
+                                   u.nombre = '{$nombre}' AND u.id <> '{$iduser}'");
 
-        $consultaeditar = pg_num_rows($sqleditar);
-
-        echo "sql editar: ".$sqleditar;
-
-        echo "PRUEBA:" .$consultaeditar;
+        echo "Control: " . var_dump($control);
 
         if($editar_check > 0){
+
             $alert='<p class="msg_error">El usuario o su nombre están en uso </p>';
         }else{
 
@@ -186,8 +187,6 @@ if(!empty($_POST)){
                         </div>
                     </article>
                 </div>
-
-                
                    
                     <section class="container">
 
