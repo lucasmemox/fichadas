@@ -59,46 +59,43 @@ if(!empty($_POST)){
         $nombre =  $_POST['nombre'];
         $rol =  $_POST['rol'];
 
-        echo "idusuario: ". $iduser; 
-        echo "usuario: ". $usuario;
-        echo "clave: ". $clave;
-        echo "estado: ". $estado;
-        echo "nombre:  ". $nombre;
-        echo "rol: ".$rol;  
+        $compUsuario = pg_query("SELECT  count(*)
+                        FROM usuario 
+                        WHERE (id != '{$iduser}' AND usuario = '{$usuario}') 
+                        OR (id != '{$iduser}' AND nombre = '{$nombre}') 
+                        ORDER BY count(*)");
 
-        $control = pg_query("SELECT count(*) FROM usuario u 
-                             WHERE u.usuario = '{$usuario}' AND u.id <> '{$iduser}'
-                                   u.nombre = '{$nombre}' AND u.id <> '{$iduser}'");
-
-        echo "Control: " . var_dump($control);
+        while($row = pg_fetch_row($compUsuario)){
+            $editar_check = $row[0]; 
+        };
 
         if($editar_check > 0){
 
             $alert='<p class="msg_error">El usuario o su nombre están en uso </p>';
         }else{
 
-            // if(empty($_POST["clave"])){
-            //     $sql_actualizar = pg_query("UPDATE usuario
-            //                                 SET  nombre = '{$nombre}', 
-            //                                 usuario = '{$usuario}', 
-            //                                 idestado = '{$estado}',
-            //                                 id_rol    ='{$rol}'
-            //                                 WHERE id ='{$idusuario}'");                
-            // }else{
-            // $sql_actualizar = pg_query("UPDATE usuario
-            //                             SET  nombre = '{$nombre}', 
-            //                                  usuario = '{$usuario}', 
-            //                                  clave   = '{$clave}', 
-            //                                  idestado = '{$estado}',
-            //                                  id_rol    ='{$rol}'
-            //                                  WHERE id ='{$idusuario}'");
-            // }
+            if(empty($_POST["clave"])){
+                $sql_actualizar = pg_query("UPDATE usuario
+                                            SET  nombre = '{$nombre}', 
+                                            usuario = '{$usuario}', 
+                                            idestado = '{$estado}',
+                                            id_rol    ='{$rol}'
+                                            WHERE id ='{$iduser}'");                
+            }else{
+            $sql_actualizar = pg_query("UPDATE usuario
+                                        SET  nombre = '{$nombre}', 
+                                             usuario = '{$usuario}', 
+                                             clave   = '{$clave}', 
+                                             idestado = '{$estado}',
+                                             id_rol    ='{$rol}'
+                                             WHERE id ='{$iduser}'");
+            }
            
-            // if($sql_actualizar){
-            //     $alert='<p class="msg_guardar">El usuario fue Actualizado</p>';
-            // }else{
-            //     $alert='<p class="msg_error">Error al actualizar el usuario</p>';
-            // }
+            if($sql_actualizar){
+                $alert='<p class="msg_guardar">El usuario fue Actualizado</p>';
+            }else{
+                $alert='<p class="msg_error">Error al actualizar el usuario</p>';
+            }
         }
     }
 }
