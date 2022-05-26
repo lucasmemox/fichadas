@@ -22,7 +22,7 @@ if(!empty($_POST)){
             $clave_md5= md5($clave);
             $activo = 1;
         
-            $insert_usuario = pg_query("INSERT INTO usuario(id, usuario, clave, idestado, nombre, id_rol)  VALUES((select nextVal('sq_rol')),'{$usuario}','{$clave_md5}','{$activo}','{$nombre}','{$rol}')");
+            $insert_usuario = pg_query("INSERT INTO usuario(id, usuario, clave, idestado, nombre, id_rol)  VALUES((select nextVal('sq_usuario')),'{$usuario}','{$clave_md5}','{$activo}','{$nombre}','{$rol}')");
             
             if($insert_usuario){
                 $alert='<p class="msg_guardar">El usuario fue Creado con Éxito</p>';
