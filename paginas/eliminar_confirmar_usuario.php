@@ -1,112 +1,50 @@
 <!doctype html>
 <?php
- 
-require_once('../src/fichadas.php'); 
 
 // TOMO LOS DATOS ENVIADOS DESDE USUARIOS
-if(empty($_GET['id'])){
+if (empty($_REQUEST['id'])) {
     header("Location: usuarios.php");
-}
+} else {
+    require_once '../src/fichadas.php';
+    $idusuario = $_REQUEST['id'];
 
-$idusuario =  $_GET['id'];
+    $consulta = pg_query("SELECT u.usuario ,u.nombre , r.rol as rol  FROM  usuario u, rol r
+                          WHERE u.id_rol = r.id and u.id = '{$idusuario}'");
 
-$consulta= pg_query("SELECT u.id , u.usuario , u.clave, u.idestado, e.estado , u.nombre , u.id_rol as idrol, r.rol as rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.id = '{$idusuario}'");
+    $resuconsulta = pg_num_rows($consulta);
 
-$resuconsulta =pg_num_rows($consulta);
+    if ($resuconsulta > 0) {
+        while ($datos = pg_fetch_array($consulta)) {
 
-if($resuconsulta == 0){
-    header("Location: usuarios.php");
-    }else{
-        $option = '';
-        while($datos = pg_fetch_array($consulta)){ 
-
-            $idusuario =  $datos['id'];
-            $usuario =  $datos['usuario'];
-            $clave =  $datos['clave'];
-            $idestado = $datos['idestado'];
-            $estado =  $datos['estado'];
-            $nombre =  $datos['nombre'];
-            $idrol =  $datos['idrol'];
-            $rol =  $datos['rol'];
-            
-            if($idrol == 1){
-                $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
-            }else if($idrol == 2){
-                $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
-            }else if($idrol == 3){
-                        $option= '<option value="'.$idrol.'" select>'.$rol.'</option>';
-            }
-
-            if($idestado == 1){
-                $optionestado = '<option value="'.$idestado.'" select>'.$estado.'</option>';
-            }else if($idestado == 2){
-                $optionestado = '<option value="'.$idestado.'" select>'.$estado.'</option>';
-            }
-    }
-}
-
-// HAGO EL POST PARA ACTUALIZAR LOS DATOS 
-if(!empty($_POST)){
-    $alert='';
-    if(empty($_POST["nombre"]) || empty($_POST["usuario"]) || empty($_POST["rol"]) || empty($_POST["estado"])){
-        $alert='<p class="msg_error">Todos los campos son obligatorios </p>';
-    }else{
-
-        $iduser =  $_POST['idusuario'];
-        $usuario =  $_POST['usuario'];
-        $clave =  $_POST['clave'];
-        $estado =  $_POST['estado'];
-        $nombre =  $_POST['nombre'];
-        $rol =  $_POST['rol'];
-
-        $compUsuario = pg_query("SELECT  count(*)
-                        FROM usuario 
-                        WHERE (id != '{$iduser}' AND usuario = '{$usuario}') 
-                        OR (id != '{$iduser}' AND nombre = '{$nombre}') 
-                        ORDER BY count(*)");
-
-        while($row = pg_fetch_row($compUsuario)){
-            $editar_check = $row[0]; 
-        };
-
-        if($editar_check > 0){
-
-            $alert='<p class="msg_error">El usuario o su nombre están en uso </p>';
-        }else{
-
-            if(empty($_POST["clave"])){
-                $sql_actualizar = pg_query("UPDATE usuario
-                                            SET  nombre = '{$nombre}', 
-                                            usuario = '{$usuario}', 
-                                            idestado = '{$estado}',
-                                            id_rol    ='{$rol}'
-                                            WHERE id ='{$iduser}'");                
-            }else{
-            $sql_actualizar = pg_query("UPDATE usuario
-                                        SET  nombre = '{$nombre}', 
-                                             usuario = '{$usuario}', 
-                                             clave   = '{$clave}', 
-                                             idestado = '{$estado}',
-                                             id_rol    ='{$rol}'
-                                             WHERE id ='{$iduser}'");
-            }
-           
-            if($sql_actualizar){
-                $alert='<p class="msg_guardar">El usuario fue Actualizado</p>';
-            }else{
-                $alert='<p class="msg_error">Error al actualizar el usuario</p>';
-            }
+            $usuario = $datos['usuario'];
+            $nombre = $datos['nombre'];
+            $rol = $datos['rol'];
         }
+    } else {
+        header("Location: usuarios.php");
     }
 }
 
+if ($idrol == 1) {
+    $option = '<option value="' . $idrol . '" select>' . $rol . '</option>';
+} else if ($idrol == 2) {
+    $option = '<option value="' . $idrol . '" select>' . $rol . '</option>';
+} else if ($idrol == 3) {
+    $option = '<option value="' . $idrol . '" select>' . $rol . '</option>';
+}
+
+if ($idestado == 1) {
+    $optionestado = '<option value="' . $idestado . '" select>' . $estado . '</option>';
+} else if ($idestado == 2) {
+    $optionestado = '<option value="' . $idestado . '" select>' . $estado . '</option>';
+}
 ?>
 <html lang="es">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link rel="icon" href=".../imagenes/favicon.ico">
     <link href="../css/estilos.css" rel="stylesheet" type="text/css" />
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -115,7 +53,7 @@ if(!empty($_POST)){
     <script src="https://kit.fontawesome.com/4cee06ab99.js" crossorigin="anonymous"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/4cee06ab99.js" crossorigin="anonymous"></script>
-  
+
     <title>Eliminar Usuario</title>
   </head>
 
@@ -175,21 +113,33 @@ if(!empty($_POST)){
 
         <div class="principal-eliminar-usuarios">
             <main>
-                <!-- <div class="contenedor-usuario-editar">
+                <div class="contenedor-usuario-editar">
                     <article class="art-index">
                         <div class="titulo">
                             <div class="titulo-contenido">
-                                <h1>USUARIO</h1>
+                                <h1>ELIMINAR USUARIO</h1>
                             </div>
                         </div>
                     </article>
-                </div> -->
-                   
-                    <section class="container">
+                </div>
 
-                                   
-                    </section>                     
-    
+                    <section class="container">
+                    <div class="contenedor-eliminar-usuario">
+                        <h2>Esta seguro de Eliminar el Usuario:</h2>
+                        <p>Nombre:<span><?php echo $nombre; ?></span></p>
+                        <p>Usuario:<span><?php echo $usuario; ?></span></p>
+                        <p>Rol:<span><?php echo $rol; ?></span></p>
+                        
+                    <form>
+                    <a href="../paginas/usuarios.php" class="btn-cancelar">Cancelar</a>
+                    <input type="submit" value="Aceptar" class="btn-aceptar"/>
+                    </form>
+                    </div>
+
+                    
+
+                    </section>
+
             </main>
 
         </div>

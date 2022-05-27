@@ -241,7 +241,6 @@ body {
 
 //FIN PIE
 
-
 //Eliminar usuarios para
 .contenedor-eliminar-usuarios-grid {
   display: grid;
@@ -272,14 +271,32 @@ body {
     /*Separación entre lineas de un párrafo*/
     color: black;
   }
+
+  .container {
+    .contenedor-eliminar-usuario {
+      text-align: center;
+      h2 {
+        font-size:12pt;
+      }
+      span{
+        font-weight: bold;
+        color:#4f72d4;
+        font-size:12pt;
+      }
+      .btn-aceptar{
+        @include boton;
+      }
+      .btn-cancelar{
+        @include boton;
+        text-decoration: none;
+      }
+    }
+  }
 }
 
-    //Eliminar usuarios
+//Eliminar usuarios
 
 @import "index";
 @import "usuarios";
 @import "registro_usuarios";
 @import "editar_usuarios";
-
-
-

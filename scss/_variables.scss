@@ -3,3 +3,14 @@
     background: -webkit-linear-gradient(to right, #78ffd6, #007991);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #78ffd6, #007991); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+@mixin boton{
+    width:124px;
+    background: #478ba2;
+    color: #fff;
+    display: inline-block;
+    padding:5px;
+    border-radius: 5px;
+    cursor:pointer;
+    margin: 14px;
+}

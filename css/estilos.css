@@ -233,6 +233,33 @@ body {
     line-height: 1.5em;
     /*Separación entre lineas de un párrafo*/
     color: black; }
+  .contenedor-eliminar-usuarios-grid .container .contenedor-eliminar-usuario {
+    text-align: center; }
+    .contenedor-eliminar-usuarios-grid .container .contenedor-eliminar-usuario h2 {
+      font-size: 12pt; }
+    .contenedor-eliminar-usuarios-grid .container .contenedor-eliminar-usuario span {
+      font-weight: bold;
+      color: #4f72d4;
+      font-size: 12pt; }
+    .contenedor-eliminar-usuarios-grid .container .contenedor-eliminar-usuario .btn-aceptar {
+      width: 124px;
+      background: #478ba2;
+      color: #fff;
+      display: inline-block;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 14px; }
+    .contenedor-eliminar-usuarios-grid .container .contenedor-eliminar-usuario .btn-cancelar {
+      width: 124px;
+      background: #478ba2;
+      color: #fff;
+      display: inline-block;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 14px;
+      text-decoration: none; }
 
 .contenedor-grid {
   display: grid;
