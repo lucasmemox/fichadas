@@ -210,6 +210,30 @@ body {
   height: 2px;
   background-color: white; }
 
+.contenedor-eliminar-usuarios-grid {
+  display: grid;
+  /*utilizo grid*/
+  grid-template-areas: "cabecera           cabecera            cabecera" "eliminarusuario    eliminarusuario     eliminarusuario" "piepagina          piepagina           piepagina";
+  grid-template-columns: repeat(3, 1fr);
+  /*Son 3 las columnas*/
+  grid-template-rows: repeat(3, 1fr);
+  /*Son 3 las Filas*/
+  grid-template-rows: 80px auto auto;
+  margin-top: 0px;
+  /*Margen Superior 0*/
+  margin: 20px auto;
+  /*centro la pagina*/
+  grid-gap: 10px;
+  /*espaciado entre secciones*/ }
+  .contenedor-eliminar-usuarios-grid .principal-eliminar-usuarios {
+    grid-area: eliminarusuario;
+    margin: 0 auto;
+    /*0 arriba y abajo - y automático a los costados - me queda centrado*/
+    font-size: 1.5rem;
+    line-height: 1.5em;
+    /*Separación entre lineas de un párrafo*/
+    color: black; }
+
 .contenedor-grid {
   display: grid;
   /*utilizo grid*/

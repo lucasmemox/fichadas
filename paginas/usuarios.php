@@ -118,7 +118,7 @@ include '../src/fichadas.php';
                                 <td>
                                 <a class = "agregar-usuario" href="../paginas/registro_usuarios.php">Agregar</a>
                                 <a class = "editar-usuario" href="../paginas/editar_usuario.php?id=<?php echo $row["id"]  ?>">Editar</a>
-                                <a class = "eliminar-usuario" href="#">Eliminar</a>
+                                <a class = "eliminar-usuario" href="../paginas/eliminar_confirmar_usuario.php">Eliminar</a>
                                 </td>
                             </tr>
                             <?php
