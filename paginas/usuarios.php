@@ -9,7 +9,7 @@ $rolUsuario = $_SESSION['rolsesion'];
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link rel="icon" href="../imagenes/favicon.ico">
     <link href="../css/estilos.css" rel="stylesheet" type="text/css" />
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -18,7 +18,7 @@ $rolUsuario = $_SESSION['rolsesion'];
     <script src="https://kit.fontawesome.com/4cee06ab99.js" crossorigin="anonymous"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/4cee06ab99.js" crossorigin="anonymous"></script>
-  
+
     <title>Fichadas UTN-FRCU</title>
   </head>
 
@@ -69,7 +69,7 @@ $rolUsuario = $_SESSION['rolsesion'];
                                         <a class="nav-link" href=""> | </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href=""><?php echo $_SESSION["usuario"];   ?></a>
+                                        <a class="nav-link" href=""><?php echo $_SESSION["usuario"]; ?></a>
                                     </li>
                                 </ul>
                             </div>
@@ -92,9 +92,9 @@ $rolUsuario = $_SESSION['rolsesion'];
                 </div>
 
                 <div class="contenedor-tabla-usuario">
-                   
+
                     <section class="contenedor-section-usuario">
-                                                
+
                         <table>
                             <tr>
                                 <th>ID</th>
@@ -102,44 +102,46 @@ $rolUsuario = $_SESSION['rolsesion'];
                                 <th>ESTADO</th>
                                 <th>NOMBRE</th>
                                 <th>ROL</th>
-                                <?php if($rolUsuario == 1) {  ?>
+                                <?php if ($rolUsuario == 1) {?>
                                 <th>EVENTO</th>
-                                <?php }  ?>
-                                
+                                <?php }?>
+
                             </tr>
                             <?php
+
+                            if ($rolUsuario == 1) {
+                            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id order by 1");
+                            } else {
                             $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 order by 1");
+                            }
 
-                            $usuarios_check = pg_num_rows($sql);
+                        $usuarios_check = pg_num_rows($sql);
 
-                            if($usuarios_check > 0){
+                        if ($usuarios_check > 0) {
 
-                                while($row = pg_fetch_array($sql)){
-                            ?>
+                        while ($row = pg_fetch_array($sql)) {
+                        ?>
                             <tr>
-                                <td><?php echo $row["id"]  ?></td>
+                                <td><?php echo $row["id"] ?></td>
                                 <td><?php echo $row["usuario"] ?></td>
                                 <td><?php echo $row["estado"] ?></td>
                                 <td><?php echo $row["nombre"] ?></td>
                                 <td><?php echo $row["rol"] ?></td>
-                                <?php if($rolUsuario == 1) {  ?>
+                                <?php if ($rolUsuario == 1) {?>
                                 <td>
                                 <a class = "agregar-usuario" href="../paginas/registro_usuarios.php">Agregar</a>
-                                <a class = "editar-usuario" href="../paginas/editar_usuario.php?id=<?php echo $row["id"]  ?>">Editar</a>
+                                <a class = "editar-usuario" href="../paginas/editar_usuario.php?id=<?php echo $row["id"] ?>">Editar</a>
                                 <a class = "eliminar-usuario" href="../paginas/eliminar_confirmar_usuario.php?id=<?php echo $row["id"] ?>">Eliminar</a>
                                 </td>
-                                <?php }  ?>
+                                <?php }?>
 
                             </tr>
-                            <?php
+                        <?php
                                 }
                             }
-                            ?>
-                            
-                            
+                        ?>
                         </table>
-
-                    </section>                     
+                    </section>
                 </div>
             </main>
 

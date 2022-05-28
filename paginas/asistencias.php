@@ -8,15 +8,15 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <link rel="icon" href="./imagenes/favicon.ico">
-    <link href="./css/estilos.css" rel="stylesheet" type="text/css" />
-    <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="../imagenes/favicon.ico">
+    <link href="../css/estilos.css" rel="stylesheet" type="text/css" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4cee06ab99.js" crossorigin="anonymous"></script>
-    <script src="./js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/4cee06ab99.js" crossorigin="anonymous"></script>
-  
+
     <title>Fichadas UTN-FRCU</title>
   </head>
 
@@ -25,8 +25,8 @@ session_start();
         <div class="col-12 cabecera">
             <header>
                 <div class="col-12 cabecera-nav">
-                    <a href="../index.html"><img src="./imagenes/utn_fondo.png" alt="Logo"
-                            title="Danzas Pamela Rodriguez" class="logo-imagen"></a>
+                    <a href="../index.html"><img src="../imagenes/utn_fondo.png" alt="Logo"
+                            title="Fichadas FRCU" class="logo-imagen"></a>
                     <nav class="navbar navbar-expand-md">
                         <div class="container-fluid">
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -38,20 +38,36 @@ session_start();
                             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                                 <ul class="navbar-nav my-auto mb-2 mb-lg-0">
                                     <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="./home.php">Inicio</a>
+                                        <a class="nav-link active" aria-current="page" href="./home.php">Inicio</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="./paginas/conocenos.html">Conocenos</a>
+                                            href="./paginas/conocenos.html">Fichadas</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="./paginas/fotos.html">Fotos</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./paginas/inscripciones.html">Inscripción 2022</a>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Usuarios
+                                        </a>
+                                        <ul class="dropdown-menu fondo-desplegable" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="./usuarios.php">Usuarios</a></li>
+                                            <li><a class="dropdown-item" href="./registro-usuarios.php">Registrar Usuarios</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./paginas/contacto.html">Contacto</a>
+                                        <a class="nav-link" href="">Salir</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href=""> | </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href=""><?php echo $_SESSION["usuario"]; ?></a>
                                     </li>
                                 </ul>
                             </div>
@@ -74,8 +90,8 @@ session_start();
                 </div>
 
                 <div class="contenedor-principal">
-                   
-                    
+
+
                 </div>
             </main>
 
@@ -86,7 +102,7 @@ session_start();
                 <div class="piepagina-contenedor">
                     <div class="info-pie">
                         <div class="logo-pie">
-                            <a href="./index.html"><img src="./imagenes/utn_fondo.png" alt="Logo"
+                            <a href="./index.html"><img src="../imagenes/utn_fondo.png" alt="Logo"
                                     title="UTN FRCU" class="logo-pie"></a>
                         </div>
                         <div class="datos-infopie">

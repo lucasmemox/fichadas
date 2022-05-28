@@ -5,6 +5,11 @@ require_once '../src/fichadas.php';
 
 // TOMO LOS DATOS DEL FORMULARIO
 if (!empty($_POST)) {
+
+    if($_POST['idusuario'] == 1){
+        header("Location: usuarios.php");
+        exit;
+    }
  
     $idusuario = $_POST['idusuario'];
 
