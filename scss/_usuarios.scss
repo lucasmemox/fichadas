@@ -99,6 +99,30 @@
           }
         }
       }
+
+      .paginador{
+        height: 60px;
+        
+        ul{
+          padding: 12px;
+          list-style: none;
+          background: #fff;
+          margin-top:10px;
+          margin-bottom: 5%;
+          display: flex;
+        }
+
+        a, .pageseleccion{
+         
+          @include paginadora;
+        
+        }
+
+        a:hover{
+          background: #ddd;
+        }
+      }
+
     }
   }
 }

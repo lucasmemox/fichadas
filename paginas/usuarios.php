@@ -107,20 +107,22 @@ $rolUsuario = $_SESSION['rolsesion'];
                                 <?php }?>
 
                             </tr>
-                            <?php
+            <?php
 
-                            if ($rolUsuario == 1) {
-                            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id order by 1");
-                            } else {
-                            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 order by 1");
-                            }
+            if ($rolUsuario == 1) {
+            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id order by 1 ASC");
+            
+            }else{
 
-                        $usuarios_check = pg_num_rows($sql);
+            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 order by 1 ASC");
+            }
 
-                        if ($usuarios_check > 0) {
+            $usuarios_check = pg_num_rows($sql);
 
-                        while ($row = pg_fetch_array($sql)) {
-                        ?>
+            if ($usuarios_check > 0) {
+
+            while ($row = pg_fetch_array($sql)) {
+            ?>
                             <tr>
                                 <td><?php echo $row["id"] ?></td>
                                 <td><?php echo $row["usuario"] ?></td>
@@ -141,6 +143,22 @@ $rolUsuario = $_SESSION['rolsesion'];
                             }
                         ?>
                         </table>
+                        <div class="paginador">
+                            <ul>
+                                <li>
+                                    <a href="#"><<</a>
+                                    <a href="#">|<<</a>
+                                    <a href="#" class="pageseleccion">1</a>
+                                    <a href="#">2</a>
+                                    <a href="#">3</a>
+                                    <a href="#">4</a>
+                                    <a href="#">5</a>
+                                    <a href="#">>>|</a>
+                                    <a href="#">>></a>
+                                </li>
+                            </ul>	    
+                        </div>
+
                     </section>
                 </div>
             </main>
