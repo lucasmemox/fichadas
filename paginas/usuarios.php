@@ -101,7 +101,7 @@ include '../src/fichadas.php';
                                 <th>EVENTO</th>
                             </tr>
                             <?php
-                            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id order by 1");
+                            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 order by 1");
 
                             $usuarios_check = pg_num_rows($sql);
 

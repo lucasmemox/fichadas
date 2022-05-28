@@ -1,11 +1,30 @@
 <!doctype html>
 <?php
 
+require_once '../src/fichadas.php';
+
+// TOMO LOS DATOS DEL FORMULARIO
+if (!empty($_POST)) {
+ 
+    $idusuario = $_POST['idusuario'];
+
+    // $consultaBorrar = pg_query("DELETE * FROM usuarios WHERE idusuario = '{$idusuario}'");
+    $consultaBorrar = pg_query("UPDATE  usuario 
+                                SET idestado = 2
+                                WHERE id= '{$idusuario}'");
+
+    if($consultaBorrar){
+        header("Location: usuarios.php");
+    }else{
+        echo "Error al Eliminar el Usuario!!!";
+    }
+}
+
 // TOMO LOS DATOS ENVIADOS DESDE USUARIOS
 if (empty($_REQUEST['id'])) {
     header("Location: usuarios.php");
 } else {
-    require_once '../src/fichadas.php';
+    
     $idusuario = $_REQUEST['id'];
 
     $consulta = pg_query("SELECT u.usuario ,u.nombre , r.rol as rol  FROM  usuario u, rol r
@@ -23,20 +42,6 @@ if (empty($_REQUEST['id'])) {
     } else {
         header("Location: usuarios.php");
     }
-}
-
-if ($idrol == 1) {
-    $option = '<option value="' . $idrol . '" select>' . $rol . '</option>';
-} else if ($idrol == 2) {
-    $option = '<option value="' . $idrol . '" select>' . $rol . '</option>';
-} else if ($idrol == 3) {
-    $option = '<option value="' . $idrol . '" select>' . $rol . '</option>';
-}
-
-if ($idestado == 1) {
-    $optionestado = '<option value="' . $idestado . '" select>' . $estado . '</option>';
-} else if ($idestado == 2) {
-    $optionestado = '<option value="' . $idestado . '" select>' . $estado . '</option>';
 }
 ?>
 <html lang="es">
@@ -117,7 +122,7 @@ if ($idestado == 1) {
                     <article class="art-index">
                         <div class="titulo">
                             <div class="titulo-contenido">
-                                <h1>ELIMINAR USUARIO</h1>
+                                <h1>DESACTIVAR USUARIO</h1>
                             </div>
                         </div>
                     </article>
@@ -125,20 +130,19 @@ if ($idestado == 1) {
 
                     <section class="container">
                     <div class="contenedor-eliminar-usuario">
-                        <h2>Esta seguro de Eliminar el Usuario:</h2>
+                        <h2>Esta seguro de Desactivar el Usuario?</h2>
                         <p>Nombre:<span><?php echo $nombre; ?></span></p>
                         <p>Usuario:<span><?php echo $usuario; ?></span></p>
                         <p>Rol:<span><?php echo $rol; ?></span></p>
                         
-                    <form>
+                    <form method="post" action="">
+                    <input type="hidden" name="idusuario" value="<?php echo $idusuario; ?>"/>    
                     <a href="../paginas/usuarios.php" class="btn-cancelar">Cancelar</a>
                     <input type="submit" value="Aceptar" class="btn-aceptar"/>
                     </form>
                     </div>
 
-                    
-
-                    </section>
+                </section>
 
             </main>
 

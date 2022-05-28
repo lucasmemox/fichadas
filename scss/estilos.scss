@@ -276,17 +276,17 @@ body {
     .contenedor-eliminar-usuario {
       text-align: center;
       h2 {
-        font-size:12pt;
+        font-size: 12pt;
       }
-      span{
+      span {
         font-weight: bold;
-        color:#4f72d4;
-        font-size:12pt;
+        color: #4f72d4;
+        font-size: 12pt;
       }
-      .btn-aceptar{
+      .btn-aceptar {
         @include boton;
       }
-      .btn-cancelar{
+      .btn-cancelar {
         @include boton;
         text-decoration: none;
       }
