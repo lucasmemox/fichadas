@@ -16,11 +16,11 @@ $coneccion = pg_connect($conn) or die ("Error de conexión. ". pg_last_error());
 
   if($claveSinHash === 'fichadarrhh'){
    
-    $sql = pg_query("SELECT id, nombre FROM usuario WHERE usuario = '{$usuario}' AND idestado = 1");
+    $sql = pg_query("SELECT id, nombre, id_rol FROM usuario WHERE usuario = '{$usuario}' AND idestado = 1");
 
     }else{
   
-    $sql = pg_query("SELECT id, nombre FROM usuario WHERE usuario = '{$usuario}' AND clave = '{$claveHash}' AND idestado = 1");
+    $sql = pg_query("SELECT id, nombre, id_rol FROM usuario WHERE usuario = '{$usuario}' AND clave = '{$claveHash}' AND idestado = 1");
     }
 
     $login_check = pg_num_rows($sql);
@@ -31,6 +31,7 @@ $coneccion = pg_connect($conn) or die ("Error de conexión. ". pg_last_error());
 	            
 	            $_SESSION['idusuario'] = $row['id'];
 	            $_SESSION['usuario'] = $row['nombre'];
+              $_SESSION['rolsesion'] = $row['id_rol'];
 			
            header('Location: http://localhost/asistencias/paginas/home.php');
 	        

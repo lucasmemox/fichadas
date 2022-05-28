@@ -2,6 +2,8 @@
 <?php
 session_start();
 include '../src/fichadas.php';
+$rolUsuario = $_SESSION['rolsesion'];
+echo "Rol del Usuario: " .$rolUsuario;
 ?>
 <html lang="es">
   <head>
@@ -116,9 +118,11 @@ include '../src/fichadas.php';
                                 <td><?php echo $row["nombre"] ?></td>
                                 <td><?php echo $row["rol"] ?></td>
                                 <td>
-                                <a class = "agregar-usuario" href="../paginas/registro_usuarios.php">Agregar</a>
+                                  
+                                <a class = "agregar-usuario" href="../paginas/registro_usuarios.php">Agregar <?php echo $_SESSION['rolsesion'];?></a>
                                 <a class = "editar-usuario" href="../paginas/editar_usuario.php?id=<?php echo $row["id"]  ?>">Editar</a>
                                 <a class = "eliminar-usuario" href="../paginas/eliminar_confirmar_usuario.php?id=<?php echo $row["id"] ?>">Eliminar</a>
+
                                 </td>
                             </tr>
                             <?php
