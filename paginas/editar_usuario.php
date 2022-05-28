@@ -82,10 +82,11 @@ if(!empty($_POST)){
                                             id_rol    ='{$rol}'
                                             WHERE id ='{$iduser}'");                
             }else{
+            $claveHash = md5($clave);
             $sql_actualizar = pg_query("UPDATE usuario
                                         SET  nombre = '{$nombre}', 
                                              usuario = '{$usuario}', 
-                                             clave   = '{$clave}', 
+                                             clave   = '{$claveHash}', 
                                              idestado = '{$estado}',
                                              id_rol    ='{$rol}'
                                              WHERE id ='{$iduser}'");

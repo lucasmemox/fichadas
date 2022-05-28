@@ -3,7 +3,6 @@
 session_start();
 include '../src/fichadas.php';
 $rolUsuario = $_SESSION['rolsesion'];
-echo "Rol del Usuario: " .$rolUsuario;
 ?>
 <html lang="es">
   <head>
@@ -100,7 +99,10 @@ echo "Rol del Usuario: " .$rolUsuario;
                                 <th>ESTADO</th>
                                 <th>NOMBRE</th>
                                 <th>ROL</th>
+                                <?php if($rolUsuario == 1) {  ?>
                                 <th>EVENTO</th>
+                                <?php }  ?>
+                                
                             </tr>
                             <?php
                             $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 order by 1");
@@ -117,13 +119,14 @@ echo "Rol del Usuario: " .$rolUsuario;
                                 <td><?php echo $row["estado"] ?></td>
                                 <td><?php echo $row["nombre"] ?></td>
                                 <td><?php echo $row["rol"] ?></td>
+                                <?php if($rolUsuario == 1) {  ?>
                                 <td>
-                                  
-                                <a class = "agregar-usuario" href="../paginas/registro_usuarios.php">Agregar <?php echo $_SESSION['rolsesion'];?></a>
+                                <a class = "agregar-usuario" href="../paginas/registro_usuarios.php">Agregar</a>
                                 <a class = "editar-usuario" href="../paginas/editar_usuario.php?id=<?php echo $row["id"]  ?>">Editar</a>
                                 <a class = "eliminar-usuario" href="../paginas/eliminar_confirmar_usuario.php?id=<?php echo $row["id"] ?>">Eliminar</a>
-
                                 </td>
+                                <?php }  ?>
+
                             </tr>
                             <?php
                                 }
