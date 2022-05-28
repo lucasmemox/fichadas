@@ -64,10 +64,10 @@ echo "Rol del Usuario: " .$rolUsuario;
                                          </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./paginas/inscripciones.html">Inscripción 2022</a>
+                                        <a class="nav-link" href="">Salir</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./paginas/contacto.html">Contacto</a>
+                                        <a class="nav-link" href=""><?php echo $_SESSION["usuario"];   ?></a>
                                     </li>
                                 </ul>
                             </div>
