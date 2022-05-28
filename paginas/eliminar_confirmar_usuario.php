@@ -84,7 +84,7 @@ if (empty($_REQUEST['id'])) {
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="./paginas/conocenos.html">Conocenos</a>
+                                            href="./paginas/conocenos.html">Fichadas</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="./paginas/fotos.html">Fotos</a>
@@ -106,7 +106,10 @@ if (empty($_REQUEST['id'])) {
                                         <a class="nav-link" href="">Salir</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href=""><?php echo $_SESSION["usuario"];   ?></a>
+                                        <a class="nav-link" href=""> | </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href=""><?php echo $_SESSION["usuario"];?></a>
                                     </li>
                                 </ul>
                             </div>
