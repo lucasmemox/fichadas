@@ -422,8 +422,9 @@ body {
           background: #fff;
           margin-top: 10px;
           margin-bottom: 5%;
-          display: flex; }
-        .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .paginador a, .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .paginador .pageseleccion {
+          display: flex;
+          justify-content: center; }
+        .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .paginador a {
           color: #428bca;
           border: 1px solid #ddd;
           padding: 5px;
@@ -433,6 +434,20 @@ body {
           width: 35px; }
         .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .paginador a:hover {
           background: #ddd; }
+        .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .paginador .pageseleccion {
+          color: #428bca;
+          border: 1px solid #ddd;
+          padding: 5px;
+          display: inline-block;
+          font-size: 12px;
+          text-align: center;
+          width: 35px;
+          color: #fff;
+          background: #428bca;
+          border: 1px solid #428bca;
+          margin-top: 10px; }
+        .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .paginador li {
+          height: 35px !important; }
 
 .contenedor-registro-usuarios-grid {
   display: grid;

@@ -59,7 +59,7 @@
         a {
           margin-top: 10px;
           margin-bottom: 30px;
-        //   color: rgb(102, 100, 99);
+          //   color: rgb(102, 100, 99);
           text-decoration: none;
         }
         .btn-nuevo-usuario {
@@ -88,7 +88,7 @@
           td {
             padding: 10px;
             .agregar-usuario {
-              color:#1d7a36;
+              color: #1d7a36;
             }
             .editar-usuario {
               color: #0ca4ce;
@@ -100,29 +100,39 @@
         }
       }
 
-      .paginador{
+      .paginador {
         height: 60px;
-        
-        ul{
+
+        ul {
           padding: 12px;
           list-style: none;
           background: #fff;
-          margin-top:10px;
+          margin-top: 10px;
           margin-bottom: 5%;
           display: flex;
+          justify-content: center;
         }
 
-        a, .pageseleccion{
-         
+        a {
           @include paginadora;
-        
         }
 
-        a:hover{
+        a:hover {
           background: #ddd;
         }
-      }
+        .pageseleccion {
+          @include paginadora;
+          color: #fff;
+          background: #428bca;
+          border: 1px solid #428bca;
+          margin-top: 10px;
+        }
 
+        li{
+          height: 35px !important;
+        
+        }
+      }
     }
   }
 }

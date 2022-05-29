@@ -105,16 +105,35 @@ $rolUsuario = $_SESSION['rolsesion'];
                                 <?php if ($rolUsuario == 1) {?>
                                 <th>EVENTO</th>
                                 <?php }?>
-
                             </tr>
             <?php
+            //Paginador
+
+            $sql_contador = pg_query("SELECT count(*) as total FROM  usuario");
+            $resu_contador = pg_fetch_array($sql_contador);
+            $total = $resu_contador['total'];                        
+           
+            $por_pagina = 5;
+            
+            if(empty($_GET['pagina'])){
+                $pagina = 1;
+            }else{
+                $pagina = $_GET['pagina'];
+            }
+
+            $desde = ($pagina-1) * $por_pagina; 
+
+            $total_paginas = ceil($total/$por_pagina);
 
             if ($rolUsuario == 1) {
-            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id order by 1 ASC");
-            
+                
+            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id
+            order by 1 ASC LIMIT $desde, $por_pagina");
+             
             }else{
 
-            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 order by 1 ASC");
+            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 order by 1 ASC
+            LIMIT $desde, $por_pagina");
             }
 
             $usuarios_check = pg_num_rows($sql);
@@ -145,17 +164,25 @@ $rolUsuario = $_SESSION['rolsesion'];
                         </table>
                         <div class="paginador">
                             <ul>
-                                <li>
-                                    <a href="#"><<</a>
-                                    <a href="#">|<<</a>
-                                    <a href="#" class="pageseleccion">1</a>
-                                    <a href="#">2</a>
-                                    <a href="#">3</a>
-                                    <a href="#">4</a>
-                                    <a href="#">5</a>
-                                    <a href="#">>>|</a>
-                                    <a href="#">>></a>
-                                </li>
+                            <?php
+                              if($pagina != 1){
+                            ?>      
+                                <li><a href="?pagina=<?php echo 1;?>"><<</a></li>
+                                <li><a href="?pagina=<?php echo $pagina-1; ?>">|<<</a></li>
+                                <?php
+                              }
+                                for ($i=1; $i < $total_paginas; $i++) {
+                                    if($pagina = $i){
+                                       echo '<li class="pageseleccion">'.$i.'</li>';
+                                    }else{
+                                       echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+                                    } 
+                                }
+                                if($pagina != $total_paginas){        
+                                ?>
+                                <li><a href="?pagina=<?php echo $pagina+1; ?>">>></a></li>
+                                <li><a href="?pagina=<?php echo $total_paginas; ?>">>>|</a></li>
+                                <?php } ?>
                             </ul>	    
                         </div>
 
