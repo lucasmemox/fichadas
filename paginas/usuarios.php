@@ -122,18 +122,18 @@ $rolUsuario = $_SESSION['rolsesion'];
             }
 
             $desde = ($pagina-1) * $por_pagina; 
-
+            echo "DESDE: ". $desde;
             $total_paginas = ceil($total/$por_pagina);
 
             if ($rolUsuario == 1) {
                 
             $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id
-            order by 1 ASC LIMIT $desde, $por_pagina");
+            order by 1 ASC LIMIT '{$por_pagina}'offset '{$desde}'");
              
             }else{
 
             $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 order by 1 ASC
-            LIMIT $desde, $por_pagina");
+            LIMIT '{$por_pagina}'offset '{$desde}'");
             }
 
             $usuarios_check = pg_num_rows($sql);
@@ -169,7 +169,7 @@ $rolUsuario = $_SESSION['rolsesion'];
                             ?>      
                                 <li><a href="?pagina=<?php echo 1;?>"><<</a></li>
                                 <li><a href="?pagina=<?php echo $pagina-1; ?>">|<<</a></li>
-                                <?php
+                            <?php
                               }
                                 for ($i=1; $i < $total_paginas; $i++) {
                                     if($pagina = $i){
@@ -179,10 +179,10 @@ $rolUsuario = $_SESSION['rolsesion'];
                                     } 
                                 }
                                 if($pagina != $total_paginas){        
-                                ?>
+                            ?>
                                 <li><a href="?pagina=<?php echo $pagina+1; ?>">>></a></li>
                                 <li><a href="?pagina=<?php echo $total_paginas; ?>">>>|</a></li>
-                                <?php } ?>
+                            <?php } ?>
                             </ul>	    
                         </div>
 
