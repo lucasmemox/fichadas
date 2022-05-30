@@ -95,7 +95,7 @@ $rolUsuario = $_SESSION['rolsesion'];
 
                     <section class="contenedor-section-usuario">
                     <!-- FORMULARIO DE BUSQUEDA -->
-                    <form action="buscar_usuario.php" method="get" class="formbusqueda">
+                    <form action="buscar_usuario.php?busqueda=" method="get" class="formbusqueda">
                         <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
                         <input type="submit" value="Buscar" class="btn-buscar">
                     </form>    

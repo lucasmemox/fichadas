@@ -381,6 +381,24 @@ body {
       /*pongo en fila*/
       justify-content: space-evenly;
       /*trabaja a nivel de fila la separacion*/ }
+      .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario .formbusqueda {
+        display: flex;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        float: right;
+        background: initial;
+        padding: 10px;
+        border-radius: 10px; }
+        .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario .formbusqueda .btn-buscar {
+          background: #1faac8;
+          color: #fff;
+          padding: 0 20px;
+          border: 0;
+          border-radius: 10px;
+          cursor: pointer;
+          margin-left: 10px; }
       .contenedor-usuarios-grid .principal-usuarios .contenedor-tabla-usuario .contenedor-section-usuario h1 {
         font-size: 25px;
         display: inline-block; }

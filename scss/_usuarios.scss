@@ -52,6 +52,29 @@
       /*trabaja a nivel de fila la separacion*/
 
       .contenedor-section-usuario {
+
+        .formbusqueda{ 
+          display: flex;
+          display: -webkit-flex;
+          display:-moz-flex;
+          display: -ms-flex;
+          display: -o-flex;
+          float: right; //que flote a la derecha
+          background: initial; // no tenga fondo
+          padding: 10px;
+          border-radius:10px;
+
+          .btn-buscar{
+            background: #1faac8;
+            color: #fff;
+            padding: 0 20px; //20 a los loados
+            border: 0;
+            border-radius:10px;
+            cursor: pointer; 
+            margin-left: 10px;
+          }
+        }
+
         h1 {
           font-size: 25px;
           display: inline-block;
