@@ -94,9 +94,17 @@ $rolUsuario = $_SESSION['rolsesion'];
                 <div class="contenedor-tabla-usuario">
 
                     <section class="contenedor-section-usuario">
+                    <?php 
+                    $busqueda = $_REQUEST['busqueda'];
+                    if(empty($busqueda)){
+                        header("Location: usuarios.php");
+                    }
+
+                    ?>  
+                    
                     <!-- FORMULARIO DE BUSQUEDA -->
                     <form action="buscar_usuario.php?busqueda=" method="get" class="formbusqueda">
-                        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
+                        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" value="<?php echo $busqueda; ?>">
                         <input type="submit" value="Buscar" class="btn-buscar">
                     </form>    
                     <!-- FIN DE BUSQUEDA -->
@@ -113,8 +121,13 @@ $rolUsuario = $_SESSION['rolsesion'];
                             </tr>
             <?php
             //Paginador
+            if ($rolUsuario == 1) {
+            $sql_contador = pg_query("SELECT count(*) as total FROM  usuario
+                                      WHERE  nombre   ilike '%".$busqueda."%'");
+            }else{
+            $sql_contador = pg_query("SELECT count(*) as total FROM  usuario WHERE idestado = 1");
+            }
 
-            $sql_contador = pg_query("SELECT count(*) as total FROM  usuario");
             $resu_contador = pg_fetch_array($sql_contador);
             $total = $resu_contador['total'];                        
            
@@ -133,11 +146,14 @@ $rolUsuario = $_SESSION['rolsesion'];
             if ($rolUsuario == 1) {
                 
             $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id
+                        and   u.nombre ilike '%{$busqueda}%'        
             order by 1 ASC LIMIT '{$por_pagina}'offset '{$desde}'");
              
             }else{
 
-            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 order by 1 ASC
+            $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 
+                        and   u.nombre ilike '%".$busqueda."%'
+                        order by 1 ASC
             LIMIT '{$por_pagina}'offset '{$desde}'");
             }
 
