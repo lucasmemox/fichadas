@@ -123,7 +123,8 @@ $rolUsuario = $_SESSION['rolsesion'];
             //Paginador
             if ($rolUsuario == 1) {
             $sql_contador = pg_query("SELECT count(*) as total FROM  usuario
-                                      WHERE  nombre   ilike '%".$busqueda."%'");
+                                      WHERE  usuario ilike '%".$busqueda."%'
+                                      or     nombre  ilike '%".$busqueda."%'");
             }else{
             $sql_contador = pg_query("SELECT count(*) as total FROM  usuario WHERE idestado = 1");
             }
@@ -146,13 +147,15 @@ $rolUsuario = $_SESSION['rolsesion'];
             if ($rolUsuario == 1) {
                 
             $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id
-                        and   u.nombre ilike '%{$busqueda}%'        
+                        and   (u.nombre ilike '%{$busqueda}%'
+                        or    u.usuario ilike '%{$busqueda}%')        
             order by 1 ASC LIMIT '{$por_pagina}'offset '{$desde}'");
              
             }else{
 
             $sql = pg_query("SELECT u.id , u.usuario , e.estado , u.nombre ,r.rol  FROM  usuario u, rol r, estado e WHERE u.id_rol = r.id and u.idestado = e.id and u.idestado = 1 
-                        and   u.nombre ilike '%".$busqueda."%'
+                        and   (u.nombre ilike '%{$busqueda}%'
+                        or    u.usuario ilike '%{$busqueda}%')
                         order by 1 ASC
             LIMIT '{$por_pagina}'offset '{$desde}'");
             }
@@ -188,21 +191,21 @@ $rolUsuario = $_SESSION['rolsesion'];
                             <?php
                               if($pagina != 1){
                             ?>      
-                                <li><a href="?pagina=<?php echo 1;?>"><<</a></li>
-                                <li><a href="?pagina=<?php echo $pagina-1; ?>">|<<</a></li>
+                                <li><a href="?pagina=<?php echo 1;?>&busqueda= <?php echo $busqueda;?>"><<</a></li>
+                                <li><a href="?pagina=<?php echo $pagina-1; ?>&busqueda= <?php echo $busqueda;?>">|<<</a></li>
                             <?php
                               }
                                 for ($i=1; $i < $total_paginas; $i++) {
                                     if($pagina = $i){
                                        echo '<li class="pageseleccion">'.$i.'</li>';
                                     }else{
-                                       echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+                                       echo '<li><a href="?pagina='.$i.'&busqueda='.$busqueda.'">'.$i.'</a></li>';
                                     } 
                                 }
                                 if($pagina != $total_paginas){        
                             ?>
-                                <li><a href="?pagina=<?php echo $pagina+1; ?>">>></a></li>
-                                <li><a href="?pagina=<?php echo $total_paginas; ?>">>>|</a></li>
+                                <li><a href="?pagina=<?php echo $pagina+1; ?>&busqueda= <?php echo $busqueda;?>">>></a></li>
+                                <li><a href="?pagina=<?php echo $total_paginas; ?>&busqueda= <?php echo $busqueda;?>">>>|</a></li>
                             <?php } ?>
                             </ul>	    
                         </div>
