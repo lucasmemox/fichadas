@@ -7,7 +7,7 @@ session_start();
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link rel="icon" href="../imagenes/favicon.ico">
     <link href="../css/estilos.css" rel="stylesheet" type="text/css" />
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -89,9 +89,90 @@ session_start();
                     </article>
                 </div>
 
-                <div class="contenedor-principal">
+                <div class="contenedor-tabla-fichada">
+                <section class="contenedor-section-fichada">
+                    <!-- FORMULARIO DE BUSQUEDA -->
+                    <form action="buscar_fichada.php" method="get" class="formbusqueda">
+                        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
+                        <input type="submit" value="Buscar" class="btn-buscar">
+                    </form>
+                    <!-- FIN DE BUSQUEDA -->
+                    <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>NOMBRE</th>
+                                <th>LEGAJO</th>
+                                <th>FECHA</th>
+                                <th>HORAS</th>
+                                <th>INGRESO</th>
+                            </tr>
+                            <?php
+        //Paginador
 
+$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha  >= CAST(now() AS DATE) -7 ");
+$resu_contador = pg_fetch_array($sql_contador);
+$total = $resu_contador['total'];
 
+$por_pagina = 50;
+
+if (empty($_GET['pagina'])) {
+    $pagina = 1;
+} else {
+    $pagina = $_GET['pagina'];
+}
+
+$desde = ($pagina - 1) * $por_pagina;
+
+$total_paginas = ceil($total / $por_pagina);
+
+$sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
+                from registros r, personal p  where r.legajo = p.legajo; 
+                order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
+
+$usuarios_check = pg_num_rows($sql);
+
+if ($usuarios_check > 0) {
+
+    while ($row = pg_fetch_array($sql)) {
+        ?>
+                            <tr>
+                                <td><?php echo $row["id"] ?></td>
+                                <td><?php echo $row["nombre"] ?></td>
+                                <td><?php echo $row["legajo"] ?></td>
+                                <td><?php echo $row["fecha"] ?></td>
+                                <td><?php echo $row["horas"] ?></td>
+                                <td><?php echo $row["ingreso"] ?></td>
+                                </tr>
+                        <?php
+}
+}
+?>
+                        </table>
+                        <div class="paginador">
+                            <ul>
+                            <?php
+if ($pagina != 1) {
+    ?>
+                                <li><a href="?pagina=<?php echo 1; ?>"><<</a></li>
+                                <li><a href="?pagina=<?php echo $pagina - 1; ?>">|<<</a></li>
+                            <?php
+}
+for ($i = 1; $i < $total_paginas; $i++) {
+    if ($pagina = $i) {
+        echo '<li class="pageseleccion">' . $i . '</li>';
+    } else {
+        echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
+    }
+}
+if ($pagina != $total_paginas) {
+    ?>
+                                <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
+                                <li><a href="?pagina=<?php echo $total_paginas; ?>">>>|</a></li>
+                            <?php }?>
+                            </ul>
+                        </div>
+
+                </section>
                 </div>
             </main>
 

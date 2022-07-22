@@ -186,6 +186,10 @@ $rolUsuario = $_SESSION['rolsesion'];
                             }
                         ?>
                         </table>
+                        <?php
+                            if ($total_paginas != 0)
+                                { 
+                        ?>
                         <div class="paginador">
                             <ul>
                             <?php
@@ -209,7 +213,9 @@ $rolUsuario = $_SESSION['rolsesion'];
                             <?php } ?>
                             </ul>	    
                         </div>
-
+                    <?php
+                                }
+                    ?>
                     </section>
                 </div>
             </main>
