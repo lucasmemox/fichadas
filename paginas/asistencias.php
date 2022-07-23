@@ -1,6 +1,8 @@
 <!doctype html>
 <?php
 session_start();
+include '../src/fichadas.php';
+$rolUsuario = $_SESSION['rolsesion'];
 ?>
 <html lang="es">
   <head>
@@ -21,7 +23,7 @@ session_start();
   </head>
 
   <body>
-  <div class="col-12 contenedor-grid">
+  <div class="col-12 contenedor-asistencias-grid">
         <div class="col-12 cabecera">
             <header>
                 <div class="col-12 cabecera-nav">
@@ -77,9 +79,9 @@ session_start();
             </header>
         </div>
 
-        <div class="principal">
+        <div class="principal-asistencias">
             <main>
-                <div class="contenedor-index">
+                <div class="contenedor-asistencias">
                     <article class="art-index">
                         <div class="titulo">
                             <div class="titulo-contenido">
@@ -89,8 +91,8 @@ session_start();
                     </article>
                 </div>
 
-                <div class="contenedor-tabla-fichada">
-                <section class="contenedor-section-fichada">
+                <div class="contenedor-tabla-asistencias">
+                <section class="contenedor-section-asistencias">
                     <!-- FORMULARIO DE BUSQUEDA -->
                     <form action="buscar_fichada.php" method="get" class="formbusqueda">
                         <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
@@ -109,11 +111,11 @@ session_start();
                             <?php
         //Paginador
 
-$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha  >= CAST(now() AS DATE) -7 ");
+$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha  >= CAST(now() AS DATE) -9 ");
 $resu_contador = pg_fetch_array($sql_contador);
 $total = $resu_contador['total'];
 
-$por_pagina = 50;
+$por_pagina = 20;
 
 if (empty($_GET['pagina'])) {
     $pagina = 1;
@@ -126,7 +128,8 @@ $desde = ($pagina - 1) * $por_pagina;
 $total_paginas = ceil($total / $por_pagina);
 
 $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
-                from registros r, personal p  where r.legajo = p.legajo; 
+                from registros r, personal p  
+                where r.legajo = p.legajo and r.fecha  >= CAST(now() AS DATE) -9 
                 order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
 
 $usuarios_check = pg_num_rows($sql);
