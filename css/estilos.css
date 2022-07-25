@@ -470,7 +470,7 @@ body {
 .contenedor-asistencias-grid {
   display: grid;
   /*utilizo grid*/
-  grid-template-areas: "cabecera      cabecera       cabecera" "asistencias   asistencias    asistencias" "piepagina     piepagina      piepagina";
+  grid-template-areas: "cabecera      cabecera       cabecera" "fichadas      fichadas       fichadas" "piepagina     piepagina      piepagina";
   grid-template-columns: repeat(3, 1fr);
   /*Son 3 las columnas*/
   grid-template-rows: repeat(3, 1fr);
@@ -482,15 +482,15 @@ body {
   /*centro la pagina*/
   grid-gap: 10px;
   /*espaciado entre secciones*/ }
-  .contenedor-asistencias-grid .principal-asistencias {
-    grid-area: asistencias;
+  .contenedor-asistencias-grid .principal-fichadas {
+    grid-area: fichadas;
     margin: 0 auto;
     /*0 arriba y abajo - y automático a los costados - me queda centrado*/
     font-size: 1.5rem;
     line-height: 1.5em;
     /*Separación entre lineas de un párrafo*/
     color: black; }
-    .contenedor-asistencias-grid .principal-asistencias .contenedor-asistencias {
+    .contenedor-asistencias-grid .principal-fichadas .contenedor-fichadas {
       width: 100%;
       height: auto;
       display: flex;
@@ -500,7 +500,7 @@ body {
       /*pongo en fila*/
       justify-content: space-evenly;
       /*trabaja a nivel de fila la separación*/ }
-    .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias {
+    .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas {
       width: 100%;
       height: auto;
       display: flex;
@@ -510,7 +510,7 @@ body {
       /*pongo en fila*/
       justify-content: space-evenly;
       /*trabaja a nivel de fila la separacion*/ }
-      .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias .formbusqueda {
+      .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas .formbusquedafichadas {
         display: flex;
         display: -webkit-flex;
         display: -moz-flex;
@@ -520,7 +520,7 @@ body {
         background: initial;
         padding: 10px;
         border-radius: 10px; }
-        .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias .formbusqueda .btn-buscar {
+        .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas .formbusquedafichadas .btn-buscar {
           background: #1faac8;
           color: #fff;
           padding: 0 20px;
@@ -528,42 +528,42 @@ body {
           border-radius: 10px;
           cursor: pointer;
           margin-left: 10px; }
-      .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias h1 {
+      .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas h1 {
         font-size: 25px;
         display: inline-block; }
-      .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias a {
+      .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas a {
         margin-top: 10px;
         margin-bottom: 30px;
         text-decoration: none; }
-      .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias .btn-nuevo-usuario {
+      .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas .btn-nuevo-usuario {
         display: inline-block;
         background-color: #239baa;
         color: #fff;
         padding: 5px 25px;
         border-radius: 4px;
         margin: 20px; }
-      .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias table {
+      .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas table {
         border-collapse: collapse;
         font-size: 12px;
         width: 100%; }
-        .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias table th {
+        .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas table th {
           text-align: center;
           padding: 10px;
           background: #3d7ba8;
           color: #fff; }
-        .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias table tr:nth-child(odd) {
+        .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas table tr:nth-child(odd) {
           background: #fff; }
-        .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias table td {
+        .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas table td {
           padding: 10px; }
-          .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias table td .agregar-usuario {
+          .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas table td .agregar-usuario {
             color: #1d7a36; }
-          .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias table td .editar-usuario {
+          .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas table td .editar-usuario {
             color: #0ca4ce; }
-          .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .contenedor-section-asistencias table td .eliminar-usuario {
+          .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .contenedor-section-fichadas table td .eliminar-usuario {
             color: #f26b6b; }
-      .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .paginador {
+      .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .paginador {
         height: 60px; }
-        .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .paginador ul {
+        .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .paginador ul {
           padding: 12px;
           list-style: none;
           background: #fff;
@@ -571,7 +571,7 @@ body {
           margin-bottom: 5%;
           display: flex;
           justify-content: center; }
-        .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .paginador a {
+        .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .paginador a {
           color: #428bca;
           border: 1px solid #ddd;
           padding: 5px;
@@ -579,9 +579,9 @@ body {
           font-size: 12px;
           text-align: center;
           width: 35px; }
-        .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .paginador a:hover {
+        .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .paginador a:hover {
           background: #ddd; }
-        .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .paginador .pageseleccion {
+        .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .paginador .pageseleccion {
           color: #428bca;
           border: 1px solid #ddd;
           padding: 5px;
@@ -593,7 +593,7 @@ body {
           background: #428bca;
           border: 1px solid #428bca;
           margin-top: 10px; }
-        .contenedor-asistencias-grid .principal-asistencias .contenedor-tabla-asistencias .paginador li {
+        .contenedor-asistencias-grid .principal-fichadas .contenedor-tabla-fichadas .paginador li {
           height: 35px !important; }
 
 .contenedor-registro-usuarios-grid {
