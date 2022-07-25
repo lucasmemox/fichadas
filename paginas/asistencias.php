@@ -94,7 +94,7 @@ $rolUsuario = $_SESSION['rolsesion'];
                 <div class="contenedor-tabla-fichadas">
                 <section class="contenedor-section-fichadas">
                     <!-- FORMULARIO DE BUSQUEDA -->
-                    <form action="buscar_fichada.php" method="get" class="formbusquedafichadas">
+                    <form action="buscar_asistencia.php" method="get" class="formbusquedafichadas">
                         <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
                         <input type="date" name="fecha" id="fecha" value="<?php echo date('Y-m-d'); ?>" />
                         <input type="submit" value="Buscar" class="btn-buscar">
@@ -111,8 +111,12 @@ $rolUsuario = $_SESSION['rolsesion'];
                             </tr>
                             <?php
         //Paginador
+$sqlmaxfecha = pg_query("SELECT max(fecha) FROM registros");
+$maxfecha = pg_fetch_row($sqlmaxfecha);
+        
+$fechab = $maxfecha[0];
 
-$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha  >= CAST(now() AS DATE) -2 ");
+$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha = '{$fechab}' ");
 $resu_contador = pg_fetch_array($sql_contador);
 $total = $resu_contador['total'];
 
@@ -130,7 +134,7 @@ $total_paginas = ceil($total / $por_pagina);
 
 $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
                 from registros r, personal p  
-                where r.legajo = p.legajo and r.fecha  >= CAST(now() AS DATE) -2
+                where r.legajo = p.legajo and r.fecha  = '{$fechab}'
                 order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
 
 $usuarios_check = pg_num_rows($sql);

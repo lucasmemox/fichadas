@@ -23,7 +23,7 @@ $rolUsuario = $_SESSION['rolsesion'];
   </head>
 
   <body>
-  <div class="col-12 contenedor-usuarios-grid">
+  <div class="col-12 contenedor-asistencias-grid">
         <div class="col-12 cabecera">
             <header>
                 <div class="col-12 cabecera-nav">
@@ -94,15 +94,17 @@ $rolUsuario = $_SESSION['rolsesion'];
                 <section class="contenedor-section-fichadas">
                 <?php 
                     $busqueda = $_REQUEST['busqueda'];
-                    $fecha = $_REQUEST['fecha'];
-                    if(empty($busqueda) && empty($fecha) ){
+                    $fechabusqueda = $_REQUEST['fecha'];
+                    echo "FECHA: ".$fechabusqueda;
+
+                    if(empty($busqueda) && empty($fechabusqueda) ){
                         header("Location: asistencias.php");
                     }
                     ?>  
                     <!-- FORMULARIO DE BUSQUEDA -->
-                    <form action="buscar_fichada.php" method="get" class="formbusquedafichadas">
-                        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
-                        <input type="date" name="fecha" id="fecha" value="<?php echo date('Y-m-d'); ?>" />
+                    <form action="buscar_asistencia.php" method="get" class="formbusquedafichadas">
+                        <input type="text" name="busqueda" id="busqueda" value="<?php echo $busqueda; ?>"placeholder="Buscar">
+                        <input type="date" name="fecha" id="fecha" value="<?php echo $fechabusqueda; ?>" />
                         <input type="submit" value="Buscar" class="btn-buscar">
                     </form>
                     <!-- FIN DE BUSQUEDA -->
@@ -118,7 +120,7 @@ $rolUsuario = $_SESSION['rolsesion'];
                             <?php
         //Paginador
 
-$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha  = ".$fecha." ");
+$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha = '{$fechabusqueda}'");
 $resu_contador = pg_fetch_array($sql_contador);
 $total = $resu_contador['total'];
 
@@ -136,7 +138,7 @@ $total_paginas = ceil($total / $por_pagina);
 
 $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
                 from registros r, personal p  
-                where r.legajo = p.legajo and r.fecha  >= CAST(now() AS DATE) -2
+                where r.legajo = p.legajo and r.fecha = '{$fechabusqueda}' 
                 order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
 
 $usuarios_check = pg_num_rows($sql);
