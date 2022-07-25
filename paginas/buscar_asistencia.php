@@ -95,8 +95,7 @@ $rolUsuario = $_SESSION['rolsesion'];
                 <?php 
                     $busqueda = $_REQUEST['busqueda'];
                     $fechabusqueda = $_REQUEST['fecha'];
-                    echo "FECHA: ".$fechabusqueda;
-
+                 
                     if(empty($busqueda) && empty($fechabusqueda) ){
                         header("Location: asistencias.php");
                     }
@@ -165,8 +164,8 @@ if ($usuarios_check > 0) {
                             <?php
 if ($pagina != 1) {
     ?>
-                                <li><a href="?pagina=<?php echo 1; ?>"><<</a></li>
-                                <li><a href="?pagina=<?php echo $pagina - 1; ?>">|<<</a></li>
+                                <li><a href="?pagina=<?php echo 1; ?>busqueda<?php echo $busqueda; ?>=&fecha=<?php echo $fechabusqueda; ?>">|<<</a></li>
+                                <li><a href="?pagina=<?php echo $pagina - 1; ?>busqueda<?php echo $busqueda; ?>=&fecha=<?php echo $fechabusqueda; ?>"><<</a></li>
                             <?php
 }
 for ($i = 1; $i < $total_paginas; $i++) {
@@ -178,8 +177,8 @@ for ($i = 1; $i < $total_paginas; $i++) {
 }
 if ($pagina != $total_paginas) {
     ?>
-                                <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-                                <li><a href="?pagina=<?php echo $total_paginas; ?>">>>|</a></li>
+                                <li><a href="?pagina=<?php echo $pagina + 1; ?>busqueda<?php echo $busqueda; ?>=&fecha=<?php echo $fechabusqueda; ?>">>></a></li>
+                                <li><a href="?pagina=<?php echo $total_paginas; ?>busqueda<?php echo $busqueda; ?>=&fecha=<?php echo $fechabusqueda; ?>">>>|</a></li>
                             <?php }?>
                             </ul>
                         </div>
