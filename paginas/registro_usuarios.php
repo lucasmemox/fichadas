@@ -1,6 +1,8 @@
 <!doctype html>
 <?php
+session_start();
 include '../src/fichadas.php';
+$rolUsuario = $_SESSION['rolsesion'];
 
 if(!empty($_POST)){
     $alert='';
@@ -74,10 +76,7 @@ if(!empty($_POST)){
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="./paginas/conocenos.html">Conocenos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./paginas/fotos.html">Fotos</a>
+                                            href="../paginas/asistencias.php">Fichadas</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -86,17 +85,20 @@ if(!empty($_POST)){
                                         </a>
                                         <ul class="dropdown-menu fondo-desplegable" aria-labelledby="navbarDropdown">
                                             <li><a class="dropdown-item" href="../paginas/usuarios.php">Usuarios</a></li>
-                                            <li><a class="dropdown-item" href="../paginas/registro-usuarios.php">Registrar Usuarios</a></li>
+                                            <li><a class="dropdown-item" href="./registro_usuarios.php">Registrar Usuarios</a></li>
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
                                          </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./paginas/inscripciones.html">Inscripción 2022</a>
+                                        <a class="nav-link" href="../salir.php">Salir</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="./paginas/contacto.html">Contacto</a>
+                                        <a class="nav-link" href=""> | </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href=""><?php echo $_SESSION["usuario"]; ?></a>
                                     </li>
                                 </ul>
                             </div>

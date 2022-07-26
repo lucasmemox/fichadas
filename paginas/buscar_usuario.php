@@ -44,7 +44,7 @@ $rolUsuario = $_SESSION['rolsesion'];
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="./paginas/conocenos.html">Fichadas</a>
+                                            href="../paginas/asistencias.php">Fichadas</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="./paginas/fotos.html">Fotos</a>
@@ -63,7 +63,7 @@ $rolUsuario = $_SESSION['rolsesion'];
                                          </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="">Salir</a>
+                                        <a class="nav-link" href="../salir.php">Salir</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href=""> | </a>

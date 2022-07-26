@@ -44,10 +44,7 @@ $rolUsuario = $_SESSION['rolsesion'];
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="./paginas/conocenos.html">Fichadas</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="./paginas/fotos.html">Fotos</a>
+                                            href="../paginas/asistencias.php">Fichadas</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -56,14 +53,14 @@ $rolUsuario = $_SESSION['rolsesion'];
                                         </a>
                                         <ul class="dropdown-menu fondo-desplegable" aria-labelledby="navbarDropdown">
                                             <li><a class="dropdown-item" href="./usuarios.php">Usuarios</a></li>
-                                            <li><a class="dropdown-item" href="./registro-usuarios.php">Registrar Usuarios</a></li>
+                                            <li><a class="dropdown-item" href="./registro_usuarios.php">Registrar Usuarios</a></li>
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
                                          </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="">Salir</a>
+                                        <a class="nav-link" href="./salir.php">Salir</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href=""> | </a>
