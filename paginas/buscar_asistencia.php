@@ -116,19 +116,19 @@ $rolUsuario = $_SESSION['rolsesion'];
                             <?php
         //Paginador
 
-//$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha = '{$fechabusqueda}'");
 if(empty($busqueda) ){
-    $sql_contador = pg_query("SELECT count(*) from registros r, personal p  
+    $sql_contador = pg_query("SELECT count(*) as total from registros r, personal p  
     where r.legajo = p.legajo and 
     r.fecha = '{$fechabusqueda}'");
 }else{
-    $sql_contador = pg_query("SELECT count(*) from registros r, personal p  
+    $sql_contador = pg_query("SELECT count(*) as total from registros r, personal p  
 where r.legajo = p.legajo and 
 r.fecha = '{$fechabusqueda}' and  p.nombre ilike '".$busqueda."%'");
 }
 
 $resu_contador = pg_fetch_array($sql_contador);
 $total = $resu_contador['total'];
+echo "Total: ".$total;
 
 $por_pagina = 20;
 
@@ -169,35 +169,41 @@ if ($usuarios_check > 0) {
                                 <td><?php echo $row["horas"] ?></td>
                                 <td><?php echo $row["ingreso"] ?></td>
                                 </tr>
-                        <?php
-}
-}
-?>
+                    <?php
+                        }
+                    }
+                    ?>
                         </table>
+                        <?php
+                            if ($total_paginas != 0)
+                                { 
+                        ?>
                         <div class="paginador">
                             <ul>
-                            <?php
-if ($pagina != 1) {
-    ?>
-                                <li><a href="?pagina=<?php echo 1; ?>busqueda<?php echo $busqueda; ?>=&fecha=<?php echo $fechabusqueda; ?>">|<<</a></li>
-                                <li><a href="?pagina=<?php echo $pagina - 1; ?>busqueda<?php echo $busqueda; ?>=&fecha=<?php echo $fechabusqueda; ?>"><<</a></li>
-                            <?php
-}
-for ($i = 1; $i < $total_paginas; $i++) {
-    if ($pagina = $i) {
+        <?php
+                if ($pagina != 1) {
+        ?>
+                    <li><a href="?pagina=<?php echo 1; ?>busqueda<?php echo $busqueda; ?>=&fecha=<?php echo $fechabusqueda; ?>">|<<</a></li>
+                     <li><a href="?pagina=<?php echo $pagina - 1; ?>busqueda<?php echo $busqueda; ?>=&fecha=<?php echo $fechabusqueda; ?>"><<</a></li>
+        <?php
+                    }
+        for ($i = 1; $i < $total_paginas; $i++) {
+        if ($pagina = $i) {
         echo '<li class="pageseleccion">' . $i . '</li>';
-    } else {
+            } else {
         echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
-    }
-}
-if ($pagina != $total_paginas) {
-    ?>
+            }
+        }
+        if ($pagina != $total_paginas) {
+        ?>
                                 <li><a href="?pagina=<?php echo $pagina + 1; ?>busqueda<?php echo $busqueda; ?>=&fecha=<?php echo $fechabusqueda; ?>">>></a></li>
                                 <li><a href="?pagina=<?php echo $total_paginas; ?>busqueda<?php echo $busqueda; ?>=&fecha=<?php echo $fechabusqueda; ?>">>>|</a></li>
                             <?php }?>
                             </ul>
                         </div>
-
+                        <?php
+                                }
+                    ?>
                 </section>
                 </div>
             </main>
