@@ -137,10 +137,11 @@ if (empty($_GET['pagina'])) {
 } else {
     $pagina = $_GET['pagina'];
 }
-
+echo "PAGINA: ".$pagina;
 $desde = ($pagina - 1) * $por_pagina;
-
+echo "DESDE: ".$desde;
 $total_paginas = ceil($total / $por_pagina);
+echo "TOTAL PAGINAS: ".$total_paginas;
 
 if(empty($busqueda) ){
 $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
