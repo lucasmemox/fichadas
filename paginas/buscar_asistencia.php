@@ -116,7 +116,17 @@ $rolUsuario = $_SESSION['rolsesion'];
                             <?php
         //Paginador
 
-$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha = '{$fechabusqueda}'");
+//$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha = '{$fechabusqueda}'");
+if(empty($busqueda) ){
+    $sql_contador = pg_query("SELECT count(*) from registros r, personal p  
+    where r.legajo = p.legajo and 
+    r.fecha = '{$fechabusqueda}'");
+}else{
+    $sql_contador = pg_query("SELECT count(*) from registros r, personal p  
+where r.legajo = p.legajo and 
+r.fecha = '{$fechabusqueda}' and  p.nombre ilike '".$busqueda."%'");
+}
+
 $resu_contador = pg_fetch_array($sql_contador);
 $total = $resu_contador['total'];
 
@@ -132,11 +142,19 @@ $desde = ($pagina - 1) * $por_pagina;
 
 $total_paginas = ceil($total / $por_pagina);
 
+if(empty($busqueda) ){
 $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
-                from registros r, personal p  
-                where r.legajo = p.legajo and r.fecha = '{$fechabusqueda}' 
-                order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
-
+            from registros r, personal p  
+            where r.legajo = p.legajo and 
+            r.fecha = '{$fechabusqueda}' 
+            order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
+}else{
+$sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
+    from registros r, personal p  
+    where r.legajo = p.legajo and 
+    r.fecha = '{$fechabusqueda}' and p.nombre ilike '".$busqueda."%' 
+    order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
+}
 $usuarios_check = pg_num_rows($sql);
 
 if ($usuarios_check > 0) {
