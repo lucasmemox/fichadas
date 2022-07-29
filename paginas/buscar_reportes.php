@@ -97,12 +97,14 @@ $rolUsuario = $_SESSION['rolsesion'];
 
                 ?>
                      <!-- FORMULARIO DE BUSQUEDA -->
-                     <form action="buscar_reportes.php" method="get" class="formbusquedareportes">
+                     <form action="validar_reportes.php" method="get" class="formbusquedareportes">
                         <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
-                        <input type="date" name="fechadesde" id="fechadesde" value="<?php echo date('Y-m-d'); ?>" />
-                        <input type="date" name="fechahasta" id="fechahasta" value="<?php echo date('Y-m-d'); ?>" />
-                        <input type="submit" value="Exportar" class="btn-buscar">
-                    </form>
+                        <input type="date" name="fechadesde" id="fechadesde" value="<?php echo $fechadesde; ?>" />
+                        <input type="date" name="fechahasta" id="fechahasta" value="<?php echo $fechahasta; ?>" />
+                        <input type="submit" value="Buscar" name="buscar" class="btn-buscar">
+                        <input type="submit" value="Exportar" name="exportar"  class="btn-buscar">
+                     </form>
+                    
                     <!-- FIN DE BUSQUEDA -->
                     <table>
                             <tr>

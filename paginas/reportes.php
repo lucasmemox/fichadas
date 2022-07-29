@@ -95,7 +95,7 @@ $rolUsuario = $_SESSION['rolsesion'];
                         <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
                         <input type="date" name="fechadesde" id="fechadesde" value="<?php echo date('Y-m-d'); ?>" />
                         <input type="date" name="fechahasta" id="fechahasta" value="<?php echo date('Y-m-d'); ?>" />
-                        <input type="submit" value="Exportar" class="btn-buscar">
+                        <input type="submit" value="Buscar" class="btn-buscar">
                     </form>
                     <!-- FIN DE BUSQUEDA -->
                     <table>
