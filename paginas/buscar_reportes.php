@@ -90,8 +90,14 @@ $rolUsuario = $_SESSION['rolsesion'];
 
                 <div class="contenedor-tabla-reportes">
                 <section class="contenedor-section-reportes">
-                    <!-- FORMULARIO DE BUSQUEDA -->
-                    <form action="buscar_reportes.php" method="get" class="formbusquedareportes">
+                <?php
+                $busqueda = $_REQUEST['busqueda'];
+                $fechadesde = $_REQUEST['fechadesde'];
+                $fechahasta = $_REQUEST['fechahasta'];
+
+                ?>
+                     <!-- FORMULARIO DE BUSQUEDA -->
+                     <form action="buscar_reportes.php" method="get" class="formbusquedareportes">
                         <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
                         <input type="date" name="fechadesde" id="fechadesde" value="<?php echo date('Y-m-d'); ?>" />
                         <input type="date" name="fechahasta" id="fechahasta" value="<?php echo date('Y-m-d'); ?>" />
@@ -107,77 +113,99 @@ $rolUsuario = $_SESSION['rolsesion'];
                                 <th>HORAS</th>
                                 <th>INGRESO</th>
                             </tr>
-                            <?php
-        //Paginador
-$sqlmaxfecha = pg_query("SELECT max(fecha) FROM registros");
-$maxfecha = pg_fetch_row($sqlmaxfecha);
-        
-$fechab = $maxfecha[0];
+                <?php
+                        //Paginador
 
-$sql_contador = pg_query("SELECT count(*) as total FROM  registros where fecha = '{$fechab}' ");
-$resu_contador = pg_fetch_array($sql_contador);
-$total = $resu_contador['total'];
+                if($fechadesde == $fechahasta ){
+                $sql_contador = pg_query("SELECT count(*) as total from registros r, personal p  
+                where r.legajo = p.legajo and 
+                r.fecha = '{$fechadesde}'");
+                }else{
+                $sql_contador = pg_query("SELECT count(*) as total from registros r, personal p  
+                where r.legajo = p.legajo and 
+                r.fecha between '{$fechadesde}' and '{$fechahasta}'");
+                }
 
-$por_pagina = 20;
+                $resu_contador = pg_fetch_array($sql_contador);
+                $total = $resu_contador['total'];   
+                echo "Total: ".$total;
 
-if (empty($_GET['pagina'])) {
-    $pagina = 1;
-} else {
-    $pagina = $_GET['pagina'];
-}
+                $por_pagina = 20;
 
-$desde = ($pagina - 1) * $por_pagina;
+                if (empty($_GET['pagina'])) {
+                    $pagina = 1;
+                } else {
+                    $pagina = $_GET['pagina'];
+                }
+                echo "PAGINA: ".$pagina;
+                $desde = ($pagina - 1) * $por_pagina;
+                echo "DESDE: ".$desde;
+                $total_paginas = ceil($total / $por_pagina);
+                echo "TOTAL PAGINAS: ".$total_paginas;
 
-$total_paginas = ceil($total / $por_pagina);
+                if($fechadesde == $fechahasta ){
+                    $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
+                                from registros r, personal p  
+                                where r.legajo = p.legajo and 
+                                r.fecha = '{$fechadesde}' 
+                                order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
+                }else{
+                    $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
+                        from registros r, personal p  
+                        where r.legajo = p.legajo and 
+                        r.fecha between '{$fechadesde}' and '{$fechahasta}' 
+                        order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
+                }
 
-$sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
-                from registros r, personal p  
-                where r.legajo = p.legajo and r.fecha  = '{$fechab}'
-                order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
+                $usuarios_check = pg_num_rows($sql);
 
-$usuarios_check = pg_num_rows($sql);
+                if ($usuarios_check > 0) {
 
-if ($usuarios_check > 0) {
-
-    while ($row = pg_fetch_array($sql)) {
-        ?>
-                            <tr>
-                                <td><?php echo $row["id"] ?></td>
-                                <td><?php echo $row["nombre"] ?></td>
-                                <td><?php echo $row["legajo"] ?></td>
-                                <td><?php echo $row["fecha"] ?></td>
-                                <td><?php echo $row["horas"] ?></td>
-                                <td><?php echo $row["ingreso"] ?></td>
-                                </tr>
+                    while ($row = pg_fetch_array($sql)) {
+                        ?>
+                                            <tr>
+                                                <td><?php echo $row["id"] ?></td>
+                                                <td><?php echo $row["nombre"] ?></td>
+                                                <td><?php echo $row["legajo"] ?></td>
+                                                <td><?php echo $row["fecha"] ?></td>
+                                                <td><?php echo $row["horas"] ?></td>
+                                                <td><?php echo $row["ingreso"] ?></td>
+                                                </tr>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                        </table>
+                                        <?php
+                                            if ($total_paginas != 0)
+                                                { 
+                                        ?>
+                                        <div class="paginador">
+                                            <ul>
                         <?php
-}
-}
-?>
-                        </table>
-                        <div class="paginador">
-                            <ul>
-                            <?php
-if ($pagina != 1) {
-    ?>
-                                <li><a href="?pagina=<?php echo 1; ?>">|<<</a></li>
-                                <li><a href="?pagina=<?php echo $pagina - 1; ?>"><<</a></li>
-                            <?php
-}
-for ($i = 1; $i < $total_paginas; $i++) {
-    if ($pagina = $i) {
-        echo '<li class="pageseleccion">' . $i . '</li>';
-    } else {
-        echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
-    }
-}
-if ($pagina != $total_paginas) {
-    ?>
-                                <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-                                <li><a href="?pagina=<?php echo $total_paginas; ?>">>>|</a></li>
+                                if ($pagina != 1) {
+                        ?>
+                <li><a href="?pagina=<?php echo 1; ?>busqueda<?php echo $busqueda; ?>=&fechadesde=<?php echo $fechadesde; ?>=&fechahasta=<?php echo $fechahasta; ?>">|<<</a></li>
+                <li><a href="?pagina=<?php echo $pagina - 1; ?>busqueda<?php echo $busqueda; ?>=&fechadesde=<?php echo $fechadesde; ?>=&fechahasta=<?php echo $fechahasta; ?>"><<</a></li>
+                <?php
+                        }
+                for ($i = 1; $i < $total_paginas; $i++) {
+                    if ($pagina = $i) {
+                    echo '<li class="pageseleccion">' . $i . '</li>';
+                    } else {
+                    echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
+                    }
+                }
+                if ($pagina != $total_paginas) {
+                ?>    
+        <li><a href="?pagina=<?php echo $pagina + 1; ?>busqueda<?php echo $busqueda; ?>=&fechadesde=<?php echo $fechadesde; ?>=&fechahasta=<?php echo $fechahasta; ?>">>></a></li>
+        <li><a href="?pagina=<?php echo $total_paginas; ?>busqueda<?php echo $busqueda; ?>=&fechadesde=<?php echo $fechadesde; ?>=&fechahasta=<?php echo $fechahasta; ?>">>>|</a></li>
                             <?php }?>
                             </ul>
                         </div>
-
+                        <?php
+                                }
+                    ?>
                 </section>
                 </div>
             </main>
@@ -236,3 +264,5 @@ if ($pagina != $total_paginas) {
     </div>
   </body>
   </html>
+
+                
