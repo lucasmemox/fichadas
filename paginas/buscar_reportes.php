@@ -91,9 +91,11 @@ $rolUsuario = $_SESSION['rolsesion'];
                 <div class="contenedor-tabla-reportes">
                 <section class="contenedor-section-reportes">
                 <?php
+                $estado = 0;
                 $busqueda = $_REQUEST['busqueda'];
                 $fechadesde = $_REQUEST['fechadesde'];
-                $fechahasta = $_REQUEST['fechahasta'];
+                $fechahasta = $_REQUEST['fechahasta']; 
+                $estado = $_REQUEST['estado'];
 
                 ?>
                      <!-- FORMULARIO DE BUSQUEDA -->
@@ -206,8 +208,21 @@ $rolUsuario = $_SESSION['rolsesion'];
                             </ul>
                         </div>
                         <?php
+                        exit;
                                 }
-                    ?>
+  
+             if (isset($_GET['estado']) && $_GET['estado'] == 1)
+    {
+        ?>
+        <div class='alert alert-success' role='alert'>
+                <p>Archivo CSV Creado Satisfactoriamente !</p>
+              </div>
+              
+        <span>Descargar:</span> <a href=fichada.txt>fichada.txt</a>
+        <?php
+    }
+ 
+             ?>
                 </section>
                 </div>
             </main>
