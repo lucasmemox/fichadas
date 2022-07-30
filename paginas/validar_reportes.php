@@ -40,12 +40,11 @@ if (!empty($exportar)) {
        while ($row = pg_fetch_array($query)) {
 
             $datos .= $row['id'] . "," . $row["nombre"] . "," . $row['legajo'] . "," . $row['fecha'] . "," . $row['horas'] . "," . $row['ingreso']."\n";
-
-            // Escribimos los datos en el archivo 
-            fwrite($fp, $datos);            
-            
         }
-
+        
+        // Escribimos los datos en el archivo 
+        fwrite($fp, $datos);  
+         
         // Después de terminar de escribir los datos, cerramos el archivo 
         fclose($fp);
     }
@@ -58,6 +57,5 @@ if (!empty($exportar)) {
 
 if (!empty($buscar)) {
 // Redireccionamos a la página del formulario, le pasamos el estado en 1
-    header('Location: buscar_reportes.php?estado=0');
-
+    header('Location: buscar_reportes.php?busqueda='.$busqueda.'&fechadesde='.$fechadesde.'&fechahasta='.$fechahasta);
 }
