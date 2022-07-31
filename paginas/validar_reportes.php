@@ -33,8 +33,8 @@ if (!empty($exportar)) {
     $check = pg_num_rows($query);
     
     // Creamos y abrimos un archivo con el nombre 'archivo.csv' para escribir los datos que recibimos del formulario
-    $fp = fopen('fichada.txt', 'w+');
-
+    $fp = fopen('../fichada.txt', 'w+');
+   
     if ($check > 0) {
         
        while ($row = pg_fetch_array($query)) {
@@ -49,8 +49,7 @@ if (!empty($exportar)) {
         fclose($fp);
     }
     
-    
-    header('Location: buscar_reportes.php?estado=1');
+     header('Location: buscar_reportes.php?estado=1');
     exit();
     
 }
