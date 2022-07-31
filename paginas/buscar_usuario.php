@@ -47,6 +47,11 @@ $rolUsuario = $_SESSION['rolsesion'];
                                             href="../paginas/asistencias.php">Fichadas</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page"
+                                            href="../paginas/reportes.php">Reportes
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="./paginas/fotos.html">Fotos</a>
                                     </li>
                                     <li class="nav-item dropdown">
