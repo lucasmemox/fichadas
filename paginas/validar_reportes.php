@@ -8,26 +8,21 @@ $buscar = $_REQUEST['buscar'];
 $fechadesde = $_REQUEST['fechadesde'];
 $fechahasta = $_REQUEST['fechahasta'];
 
-echo "exportar: ".$exportar;
-echo "buscar: ".$buscar;
-echo "buscar: ".$buscar;
-echo "buscar: ".$buscar;
-
 if (!empty($exportar)) {
 //get records from database
-    echo "ingreso a exportar: ";
+
     if ($fechadesde == $fechahasta) {
-        $query = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso
+        $query = pg_query("SELECT p.legajo, r.fecha , r.horas ,r.ingreso
                 from registros r, personal p
                 where r.legajo = p.legajo and
                 r.fecha = '{$fechadesde}'
-                order by 2,4,5");
+                order by 1,2,3");
     } else {
-        $query = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso
+        $query = pg_query("SELECT p.legajo, r.fecha , r.horas ,r.ingreso
         from registros r, personal p
         where r.legajo = p.legajo and
         r.fecha between '{$fechadesde}' and '{$fechahasta}'
-        order by 2,4,5 asc");
+        order by 1,2,3 asc");
     }
 
     $check = pg_num_rows($query);
@@ -39,7 +34,7 @@ if (!empty($exportar)) {
         
        while ($row = pg_fetch_array($query)) {
 
-            $datos .= $row['id'] . "," . $row["nombre"] . "," . $row['legajo'] . "," . $row['fecha'] . "," . $row['horas'] . "," . $row['ingreso']."\n";
+            $datos .= $row['legajo'] . "," . $row['fecha'] . "," . $row['horas'] . "," . $row['ingreso']."\n";
         }
         
         // Escribimos los datos en el archivo 

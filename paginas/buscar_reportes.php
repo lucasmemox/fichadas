@@ -214,13 +214,7 @@ $rolUsuario = $_SESSION['rolsesion'];
              if (isset($_GET['estado']) && $_GET['estado'] == 1)
     
         {
-        //  // Define headers
-        // header("Cache-Control: public");
-        // header("Content-Description: File Transfer");
-        // header("Content-Disposition: attachment; filename=fichada.txt");
-        // header("Content-Type: text/plain");
-
-        ?>
+         ?>
         <div class='alert alert-success' role='alert'>
                 <p>Archivo Creado Satisfactoriamente !</p>
         </div>
@@ -228,7 +222,6 @@ $rolUsuario = $_SESSION['rolsesion'];
         <span>Descargar:</span> <a href="../fichada.txt" download="../fichada.txt">fichada.txt</a>
         <?php
     }
- 
              ?>
                 </section>
                 </div>
