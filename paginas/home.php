@@ -25,7 +25,7 @@ session_start();
         <div class="col-12 cabecera">
             <header>
                 <div class="col-12 cabecera-nav">
-                    <a href="../index.html"><img src="../imagenes/utn_fondo.png" alt="Logo"
+                    <a href="./home.php"><img src="../imagenes/utn_fondo.png" alt="Logo"
                             title="Fichadas FRCU" class="logo-imagen"></a>
                     <nav class="navbar navbar-expand-md">
                         <div class="container-fluid">

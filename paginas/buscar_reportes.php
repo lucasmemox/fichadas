@@ -27,7 +27,7 @@ $rolUsuario = $_SESSION['rolsesion'];
         <div class="col-12 cabecera">
             <header>
                 <div class="col-12 cabecera-nav">
-                    <a href="../index.html"><img src="../imagenes/utn_fondo.png" alt="Logo"
+                    <a href="./home.php"><img src="../imagenes/utn_fondo.png" alt="Logo"
                             title="Fichadas FRCU" class="logo-imagen"></a>
                     <nav class="navbar navbar-expand-md">
                         <div class="container-fluid">
@@ -137,7 +137,7 @@ $rolUsuario = $_SESSION['rolsesion'];
 
                 $resu_contador = pg_fetch_array($sql_contador);
                 $total = $resu_contador['total'];   
-                echo "Total: ".$total;
+                // echo "Total: ".$total;
 
                 $por_pagina = 20;
 
@@ -146,11 +146,11 @@ $rolUsuario = $_SESSION['rolsesion'];
                 } else {
                     $pagina = $_GET['pagina'];
                 }
-                echo "PAGINA: ".$pagina;
+                // echo "PAGINA: ".$pagina;
                 $desde = ($pagina - 1) * $por_pagina;
-                echo "DESDE: ".$desde;
+                // echo "DESDE: ".$desde;
                 $total_paginas = ceil($total / $por_pagina);
-                echo "TOTAL PAGINAS: ".$total_paginas;
+                // echo "TOTAL PAGINAS: ".$total_paginas;
 
                 if($fechadesde == $fechahasta ){
                     $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
