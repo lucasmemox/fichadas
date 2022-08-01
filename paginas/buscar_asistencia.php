@@ -133,7 +133,7 @@ r.fecha = '{$fechabusqueda}' and  p.nombre ilike '".$busqueda."%'");
 
 $resu_contador = pg_fetch_array($sql_contador);
 $total = $resu_contador['total'];
-echo "Total: ".$total;
+// echo "Total: ".$total;
 
 $por_pagina = 20;
 
@@ -142,11 +142,11 @@ if (empty($_GET['pagina'])) {
 } else {
     $pagina = $_GET['pagina'];
 }
-echo "PAGINA: ".$pagina;
+// echo "PAGINA: ".$pagina;
 $desde = ($pagina - 1) * $por_pagina;
-echo "DESDE: ".$desde;
+// echo "DESDE: ".$desde;
 $total_paginas = ceil($total / $por_pagina);
-echo "TOTAL PAGINAS: ".$total_paginas;
+// echo "TOTAL PAGINAS: ".$total_paginas;
 
 if(empty($busqueda) ){
 $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
