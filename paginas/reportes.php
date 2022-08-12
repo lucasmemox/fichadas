@@ -97,7 +97,8 @@ $rolUsuario = $_SESSION['rolsesion'];
                 <section class="contenedor-section-reportes">
                     <!-- FORMULARIO DE BUSQUEDA -->
                     <form action="buscar_reportes.php" method="get" class="formbusquedareportes">
-                        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
+                        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar"
+                        value="<?php echo $busqueda?>"/>
                         <input type="date" name="fechadesde" id="fechadesde" value="<?php echo date('Y-m-d'); ?>" />
                         <input type="date" name="fechahasta" id="fechahasta" value="<?php echo date('Y-m-d'); ?>" />
                         <input type="submit" value="Buscar" class="btn-buscar">

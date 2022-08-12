@@ -97,7 +97,7 @@ $rolUsuario = $_SESSION['rolsesion'];
                 <section class="contenedor-section-reportes">
                 <?php
                 $estado = 0;
-                $busqueda = $_REQUEST['busqueda'];
+                $busqueda = $_REQUEST['busqueda'];//valor del imput
                 $fechadesde = $_REQUEST['fechadesde'];
                 $fechahasta = $_REQUEST['fechahasta']; 
                 $estado = $_REQUEST['estado'];
@@ -105,7 +105,8 @@ $rolUsuario = $_SESSION['rolsesion'];
                 ?>
                      <!-- FORMULARIO DE BUSQUEDA -->
                      <form action="validar_reportes.php" method="get" class="formbusquedareportes">
-                        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
+                        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar"
+                        value="<?php echo $busqueda; ?>">
                         <input type="date" name="fechadesde" id="fechadesde" value="<?php echo $fechadesde; ?>" />
                         <input type="date" name="fechahasta" id="fechahasta" value="<?php echo $fechahasta; ?>" />
                         <input type="submit" value="Buscar" name="buscar" class="btn-buscar">
@@ -125,14 +126,32 @@ $rolUsuario = $_SESSION['rolsesion'];
                 <?php
                         //Paginador
 
-                if($fechadesde == $fechahasta ){
+                if($fechadesde == $fechahasta && empty($busqueda)){
                 $sql_contador = pg_query("SELECT count(*) as total from registros r, personal p  
                 where r.legajo = p.legajo and 
                 r.fecha = '{$fechadesde}'");
                 }else{
+                    if($fechadesde == $fechahasta && !empty($busqueda)){
+                        $sql_contador = pg_query("SELECT count(*) as total from registros r, personal p  
+                        where r.legajo = p.legajo and p.nombre ilike '".$busqueda."%' 
+                        r.fecha = '{$fechadesde}'");
+                    }
+                }
+
+                if($fechadesde != $fechahasta && empty($busqueda)){
+
                 $sql_contador = pg_query("SELECT count(*) as total from registros r, personal p  
                 where r.legajo = p.legajo and 
                 r.fecha between '{$fechadesde}' and '{$fechahasta}'");
+
+                }else{
+                
+                    if($fechadesde != $fechahasta && !empty($busqueda)){
+                $sql_contador = pg_query("SELECT count(*) as total from registros r, personal p  
+                where r.legajo = p.legajo and p.nombre ilike '".$busqueda."%'
+                r.fecha between '{$fechadesde}' and '{$fechahasta}'");
+                }
+                
                 }
 
                 $resu_contador = pg_fetch_array($sql_contador);
@@ -152,18 +171,39 @@ $rolUsuario = $_SESSION['rolsesion'];
                 $total_paginas = ceil($total / $por_pagina);
                 // echo "TOTAL PAGINAS: ".$total_paginas;
 
-                if($fechadesde == $fechahasta ){
+                if($fechadesde == $fechahasta && empty($busqueda)){
                     $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
                                 from registros r, personal p  
                                 where r.legajo = p.legajo and 
                                 r.fecha = '{$fechadesde}' 
                                 order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
-                }else{
+                } else {
+
+                    if($fechadesde == $fechahasta && !empty($busqueda)){
+                    $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
+                    from registros r, personal p  
+                    where r.legajo = p.legajo and 
+                    r.fecha = '{$fechadesde}' and  p.nombre ilike '".$busqueda."%'
+                    order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
+                    }
+                }
+                
+                if($fechadesde != $fechahasta && empty($busqueda)){
+
                     $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
                         from registros r, personal p  
                         where r.legajo = p.legajo and 
                         r.fecha between '{$fechadesde}' and '{$fechahasta}' 
                         order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
+                }else{
+                    if($fechadesde != $fechahasta && !empty($busqueda)){
+                        $sql = pg_query("SELECT r.id, p.nombre, p.legajo, r.fecha , r.horas ,r.ingreso  
+                        from registros r, personal p  
+                        where r.legajo = p.legajo 
+                        and   r.fecha between '{$fechadesde}' and '{$fechahasta}' 
+                        and  p.nombre ilike '".$busqueda."%'
+                        order by 2,4,5 asc LIMIT '{$por_pagina}'offset '{$desde}'");
+                    }
                 }
 
                 $usuarios_check = pg_num_rows($sql);
