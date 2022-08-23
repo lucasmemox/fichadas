@@ -14,7 +14,7 @@ if (!empty($exportar)) {
     echo "ingrese al exportar";
 
     if($fechadesde == $fechahasta && empty($busqueda)){
-        $query = pg_query("SELECT p.legajo, r.fecha , r.horas ,r.ingreso  
+        $query = pg_query("SELECT p.legajo, to_char(r.fecha, 'dd/mm/yyyy') as fecha, r.horas ,r.ingreso  
                     from registros r, personal p  
                     where r.legajo = p.legajo and 
                     r.fecha = '{$fechadesde}' 
@@ -23,7 +23,7 @@ if (!empty($exportar)) {
 
         if($fechadesde == $fechahasta && !empty($busqueda)){
             
-        $query = pg_query("SELECT p.legajo, r.fecha , r.horas ,r.ingreso 
+        $query = pg_query("SELECT p.legajo, to_char(r.fecha, 'dd/mm/yyyy') as fecha , r.horas ,r.ingreso 
         from registros r, personal p  
         where r.legajo = p.legajo and 
         r.fecha = '{$fechadesde}' and  p.nombre ilike '".$busqueda."%'
@@ -33,7 +33,7 @@ if (!empty($exportar)) {
 
     if($fechadesde != $fechahasta && empty($busqueda)){
 
-        $query = pg_query("SELECT p.legajo, r.fecha , r.horas ,r.ingreso  
+        $query = pg_query("SELECT p.legajo, to_char(r.fecha, 'dd/mm/yyyy') as fecha , r.horas ,r.ingreso  
             from registros r, personal p  
             where r.legajo = p.legajo and 
             r.fecha between '{$fechadesde}' and '{$fechahasta}' 
@@ -43,7 +43,7 @@ if (!empty($exportar)) {
             
             echo "ingrese al fecha <>   busqueda con valor";
 
-            $query = pg_query("SELECT p.legajo, r.fecha , r.horas ,r.ingreso  
+            $query = pg_query("SELECT p.legajo, to_char(r.fecha, 'dd/mm/yyyy') as fecha , r.horas ,r.ingreso  
             from registros r, personal p  
             where r.legajo = p.legajo 
             and   r.fecha between '{$fechadesde}' and '{$fechahasta}' 
@@ -73,7 +73,6 @@ if (!empty($exportar)) {
     
     header('Location: buscar_reportes.php?estado=1');
     exit();
-    
 }
 
 if (!empty($buscar)) {
